@@ -1,6 +1,6 @@
 # Grimório de São Bento
 
-Landing page independente, em português, com uma única oferta de R$ 19,90. Vite e JavaScript, sem framework, fontes externas ou serviços obrigatórios.
+Landing page independente, em português, com oferta promocional apresentada como de R$ 197,00 por R$ 19,00. Vite e JavaScript, sem framework, fontes externas ou serviços obrigatórios.
 
 ## Desenvolvimento
 
@@ -21,12 +21,12 @@ A verificação de navegador usa Chromium em `/usr/bin/chromium` e gera capturas
 
 Copie `.env.example` para `.env.local`, ou configure as mesmas variáveis na Vercel e refaça o build. Nenhuma dessas variáveis deve conter segredos: variáveis `VITE_` são públicas.
 
-- `VITE_CHECKOUT_URL`: **novo checkout Cakto**, específico para o Grimório, com preço de R$ 19,90 e entrega do eBook configurada. Nunca reutilizar o checkout de 500 Orações. A validação de domínio não verifica produto, valor ou entrega: conferir tudo na Cakto antes de configurar. Sem URL válida, o pagamento fica desativado.
+- `VITE_CHECKOUT_URL`: **novo checkout Cakto**, específico para o Grimório, com preço de R$ 19,00 e entrega do eBook configurada. Nunca reutilizar o checkout de 500 Orações. A validação de domínio não verifica produto, valor ou entrega: conferir tudo na Cakto antes de configurar. Sem URL válida, o pagamento fica desativado.
 - `VITE_WHATSAPP_NUMBER`: número oficial com país e DDD, somente dígitos. O padrão é `5511942353966`, informado pelo responsável. A variável permite substituir esse número; uma substituição inválida desativa o link.
 - `VITE_VSL_MP4_URL` ou `VITE_VSL_EMBED_URL`: HTTPS; MP4 tem prioridade. Usar URL própria para incorporação, sem autoplay. Sem vídeo, a página mostra uma capa provisória; não existe vídeo fictício.
 - `VITE_PRIVACY_URL` e `VITE_TERMS_URL`: links HTTPS para documentos reais, com política de reembolso e entrega digital. Enquanto ausentes, são exibidas pendências em texto, sem links vazios.
 
-Confirmar os temas com o arquivo real do livro, substituir a capa ilustrativa se necessário, publicar os canais oficiais e a prestação de contas. Validar com a organização a destinação integral das vendas, o complemento de R$ 0,10 e o custeio separado das taxas antes de abrir as vendas.
+Confirmar os temas com o arquivo real do livro, substituir a capa ilustrativa se necessário, publicar os canais oficiais e a prestação de contas. Validar com a organização a destinação integral das vendas, o complemento de R$ 1,00 e o custeio separado das taxas antes de abrir as vendas. Confirmar que R$ 197,00 representa um preço de referência legítimo antes de anunciar a promoção. Os títulos no carrossel são trechos literais de depoimentos de apoiadores do Projeto Renascer com Fé, não avaliações do Grimório.
 
 ## Meta Pixel
 
