@@ -1,1 +1,37 @@
-# grimorio-sao-bento
+# Grimório de São Bento
+
+Landing page independente, em português, com uma única oferta de R$ 19,90. Vite e JavaScript, sem framework, fontes externas ou serviços obrigatórios.
+
+## Desenvolvimento
+
+Node.js 22.12+ (validado com 24.22.1).
+
+```sh
+npm ci --cache /tmp/grimorio-npm-cache
+npm run dev
+npm test
+npm run build
+npm run preview -- --port 4173
+node tests/browser.mjs
+```
+
+A verificação de navegador usa Chromium em `/usr/bin/chromium` e gera capturas em `/tmp/grimorio-*.png`. Testa 1440, 390 e 320 px. O preview deve estar em execução. Cada tarefa na nuvem já é isolada: use este checkout, sem criar worktrees.
+
+## Configuração antes das vendas
+
+Copie `.env.example` para `.env.local`, ou configure as mesmas variáveis na Vercel e refaça o build. Nenhuma dessas variáveis deve conter segredos: variáveis `VITE_` são públicas.
+
+- `VITE_CHECKOUT_URL`: **novo checkout Cakto**, específico para o Grimório, com preço de R$ 19,90 e entrega do eBook configurada. Nunca reutilizar o checkout de 500 Orações. A validação de domínio não verifica produto, valor ou entrega: conferir tudo na Cakto antes de configurar. Sem URL válida, o pagamento fica desativado.
+- `VITE_WHATSAPP_NUMBER`: número oficial com país e DDD, somente dígitos. Sem número válido, suporte permanece desativado.
+- `VITE_VSL_MP4_URL` ou `VITE_VSL_EMBED_URL`: HTTPS; MP4 tem prioridade. Usar URL própria para incorporação, sem autoplay. Sem vídeo, a página mostra uma capa provisória; não existe vídeo fictício.
+- `VITE_PRIVACY_URL` e `VITE_TERMS_URL`: links HTTPS para documentos reais, com política de reembolso e entrega digital. Enquanto ausentes, são exibidas pendências em texto, sem links vazios.
+
+Confirmar os temas com o arquivo real do livro, substituir a capa ilustrativa se necessário, publicar os canais oficiais e a prestação de contas. Validar com a organização a destinação integral das vendas, o complemento de R$ 0,10 e o custeio separado das taxas antes de abrir as vendas.
+
+## Meta Pixel
+
+Não existia Pixel neste checkout. Nenhum evento Purchase é disparado na landing page ou no clique. Quando houver uma integração real, registrar Purchase somente na confirmação de pagamento da Cakto; se houver Pixel e API de Conversões, compartilhar `event_id` para deduplicação. Não inserir um segundo rastreamento sem conferir a configuração da plataforma.
+
+## Vercel
+
+Importar somente `adalgizagon-bot/grimorio-sao-bento`. Framework: Vite; build: `npm run build`; saída: `dist`. Para preview autenticado: `vercel deploy` (sem `--prod`). Não cadastrar `VITE_CHECKOUT_URL` até conferir o novo checkout. Esta página não altera o site principal do projeto.
