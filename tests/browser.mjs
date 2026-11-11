@@ -21,8 +21,8 @@ for(const id of ['whatsapp-hero','whatsapp-offer']) {
 assert.equal(await page.locator('#whatsapp').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(22, 128, 74)');
 assert.equal(await page.locator('.hero-stage').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(24, 58, 45)');
 assert.equal(await page.locator('.trust-line').isVisible(),false);
-assert.equal(await page.locator('#vsl-launch').isVisible(),true);
-assert.equal(await page.locator('video,iframe').count(),0);
+assert.equal(await page.locator('#vsl-launch').count(),0);
+assert.equal(await page.locator('video,iframe').count(),1);
 assert.equal(await page.locator('#vsl').evaluate(el=>getComputedStyle(el).aspectRatio),'9 / 16');
 assert.equal(await page.locator('.testimonial-carousel').count(),0);
 assert.equal(await page.locator('.real-review').count(),0);
@@ -39,14 +39,14 @@ await page.locator('a[href="#oferta"]').click();await page.waitForTimeout(600);a
 assert.ok(await page.locator('.impact-section').innerText().then(t=>t.includes('R$ 1,00')&&t.includes('R$ 20,00')&&t.includes('100%')));
 await page.locator('summary').first().click();assert.equal(await page.locator('details').first().getAttribute('open'),'');
 assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-await page.locator('#vsl-launch').click();
 const iframe=page.locator('#vsl iframe');
 assert.equal(await iframe.count(),1);
 const playerUrl=new URL(await iframe.getAttribute('src'));
 assert.equal(playerUrl.origin,'https://player.mediadelivery.net');
 assert.equal(playerUrl.pathname,'/embed/805897/0d6de8ec-bba4-4c8f-ad0c-03a15a51c987');
 assert.equal(playerUrl.searchParams.get('preload'),'false');
-assert.equal(playerUrl.searchParams.get('autoplay'),'true');
+assert.equal(playerUrl.searchParams.get('autoplay'),'false');
+assert.equal(await iframe.getAttribute('loading'),'lazy');
 assert.deepEqual(errors,[]);
 await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: oferta, imagens originais do Facebook, FAQ, impacto responsivo, WhatsApp e ausência de overflow`);await page.close();
 }
