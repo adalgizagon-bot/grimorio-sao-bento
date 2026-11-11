@@ -16,6 +16,60 @@
   letter-spacing: 2.3px;
 }
 
+/* O player vertical só é carregado depois do clique do visitante. */
+.vsl.vsl-video {
+  width: min(380px, 100%);
+  max-width: 380px;
+  aspect-ratio: 9 / 16;
+  border-radius: 18px;
+  background: #09291e;
+  border-color: #d7ae44;
+}
+.vsl-video .vsl-launch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 29px 20px 26px;
+  border: 0;
+  cursor: pointer;
+  background: radial-gradient(ellipse at 48% 40%, #2c5941, #0e2f22 68%, #061b13);
+  color: #f6e9b8;
+  text-align: center;
+}
+.vsl-video .vsl-launch:focus-visible { outline: 3px solid #f2d67c; outline-offset: -5px; }
+.vsl-video .vsl-launch:hover .vsl-play-badge { transform: scale(1.08); background: #f0ce72; }
+.vsl-poster-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 2.3px; color: #efd17d; }
+.vsl-video .vsl-launch img {
+  display: block;
+  width: min(72%, 225px);
+  max-height: 47%;
+  height: auto;
+  margin: 22px 0 15px;
+  object-fit: contain;
+  transform: none;
+  filter: drop-shadow(8px 15px 15px #0007);
+}
+.vsl-poster-title { display: block; max-width: 280px; font: 27px/1.16 Georgia,serif; color: #fff5d5; }
+.vsl-play-badge {
+  display: grid;
+  place-items: center;
+  width: 67px;
+  height: 67px;
+  margin: 24px 0 15px;
+  border-radius: 50%;
+  background: #d8b14a;
+  color: #0c2c1c;
+  font-size: 23px;
+  padding-left: 4px;
+  box-shadow: 0 7px 30px #0008;
+  transition: transform .2s, background .2s;
+}
+.vsl-watch-label { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; }
+.vsl-video iframe,.vsl-video video { display: block; width: 100%; height: 100%; border: 0; }
+
 .real-testimonials {
   background: #fffcf4;
   border-bottom: 1px solid #e3dac5;
@@ -155,6 +209,11 @@
 @media (max-width: 700px) {
   .promo-banner { min-height: 66px; padding: 15px 14px; }
   .promo-banner strong { font-size: clamp(14px, 4vw, 18px); letter-spacing: 1px; }
+  .vsl.vsl-video { width: min(100%, 360px); max-width: 360px; border-radius: 13px; }
+  .vsl-video .vsl-launch { padding: 22px 16px; }
+  .vsl-poster-eyebrow { font-size: 9px; letter-spacing: 1.8px; }
+  .vsl-poster-title { font-size: 25px; }
+  .vsl-play-badge { width: 61px; height: 61px; margin: 19px 0 13px; }
   .real-testimonials { padding: 43px 0 47px; }
   .reviews-heading { margin-bottom: 23px; }
   .reviews-heading h2 { font-size: 29px; }

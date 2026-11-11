@@ -11,7 +11,15 @@ const faqs = [['O livro é físico?','Não. É um eBook digital.'],['Como recebe
 document.querySelector('#app').innerHTML = `
 <header class="promo-banner"><strong>PROMOÇÃO POR TEMPO LIMITADO</strong></header>
 <main><div class="hero-stage"><section class="hero wrap"><p class="eyebrow">FÉ QUE ACOMPANHA. AMOR QUE ALIMENTA.</p><h1>Orações poderosas para momentos de <em>fé, prosperidade, amor e transformação.</em></h1><p class="intro">Descubra uma coletânea de orações para fortalecer sua espiritualidade, renovar a esperança e buscar novos caminhos.</p>
-<div class="vsl" id="vsl"><div class="vsl-copy"><span class="eyebrow">UM ENCONTRO COM A SUA FÉ</span><h2>Um momento de pausa.<br>Um novo olhar para<br><em>a sua caminhada.</em></h2></div><img src="/book.svg" alt="Capa ilustrativa do eBook Grimório de São Bento" width="580" height="720" fetchpriority="high"></div>
+<div class="vsl vsl-video" id="vsl">
+  <button class="vsl-launch" id="vsl-launch" type="button" aria-label="Assistir à apresentação de 2 minutos do Grimório de São Bento">
+    <span class="vsl-poster-eyebrow">UM ENCONTRO COM A SUA FÉ</span>
+    <img src="/book.svg" alt="" width="580" height="720" fetchpriority="high">
+    <span class="vsl-poster-title">Uma jornada de fé começa aqui</span>
+    <span class="vsl-play-badge" aria-hidden="true">▶</span>
+    <span class="vsl-watch-label">ASSISTIR AO VÍDEO · 2 MIN</span>
+  </button>
+</div>
 <div class="hero-actions"><a class="button hero-buy" href="#oferta">QUERO MEU GRIMÓRIO POR R$ 19,00 <span aria-hidden="true">→</span></a><button class="button whatsapp-hero" id="whatsapp-hero" disabled>${whatsappIcon} TEM ALGUMA DÚVIDA? FALE NO WHATSAPP</button></div><p class="micro">eBook digital <span>·</span> Uma compra com propósito</p></section></div>
 
 <section class="real-testimonials" id="depoimentos" aria-labelledby="real-testimonials-title">
@@ -91,5 +99,15 @@ if(checkout) { const button=document.getElementById('checkout'); button.innerHTM
 const whatsapp = whatsappUrl(supportNumber);
 if(whatsapp) { for(const id of ['whatsapp','whatsapp-hero','whatsapp-offer']) activateButton(id,whatsapp); document.getElementById('whatsapp-status').textContent = 'Atendimento pelo WhatsApp oficial.'; }
 for(const [id,value] of [['privacy',e.VITE_PRIVACY_URL],['terms',e.VITE_TERMS_URL]]) { const url=httpsUrl(value); if(url) {const old=document.getElementById(id); const a=document.createElement('a'); a.textContent=id==='privacy'?'Política de Privacidade':'Termos de Compra'; a.href=url; old.replaceWith(a);} }
-const mp4=httpsUrl(e.VITE_VSL_MP4_URL), embed=httpsUrl(e.VITE_VSL_EMBED_URL);
-if(mp4 || embed) { const frame=document.getElementById('vsl'); frame.replaceChildren(); if(mp4) { const v=document.createElement('video'); v.controls=true; v.preload='none'; v.poster='/book.svg'; v.playsInline=true; v.src=mp4; v.setAttribute('aria-label','Apresentação do Grimório de São Bento'); frame.append(v); } else { const i=document.createElement('iframe'); i.src=embed; i.title='Apresentação do Grimório de São Bento'; i.loading='lazy'; i.allow='fullscreen; picture-in-picture'; i.referrerPolicy='strict-origin-when-cross-origin'; frame.append(i); } }
+const bunnyEmbed='https://player.mediadelivery.net/embed/805897/0d6de8ec-bba4-4c8f-ad0c-03a15a51c987?autoplay=true&preload=false&playsinline=true&compactControls=true&showSpeed=false&levelCap=true';
+const mp4=httpsUrl(e.VITE_VSL_MP4_URL), embed=httpsUrl(e.VITE_VSL_EMBED_URL || bunnyEmbed);
+if(mp4 || embed) {
+  document.getElementById('vsl-launch').addEventListener('click',()=>{
+    const frame=document.getElementById('vsl'); frame.replaceChildren();
+    if(mp4) {
+      const v=document.createElement('video'); v.controls=true; v.preload='none'; v.poster='/book.svg'; v.playsInline=true; v.src=mp4; v.setAttribute('aria-label','Apresentação do Grimório de São Bento'); frame.append(v); v.play().catch(()=>{});
+    } else {
+      const i=document.createElement('iframe'); i.src=embed; i.title='Apresentação do Grimório de São Bento'; i.allow='autoplay; encrypted-media; picture-in-picture; fullscreen'; i.allowFullscreen=true; i.referrerPolicy='strict-origin-when-cross-origin'; frame.append(i);
+    }
+  },{once:true});
+}
