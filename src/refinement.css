@@ -19,70 +19,29 @@
 .real-testimonials {
   background: #fffcf4;
   border-bottom: 1px solid #e3dac5;
-  padding: 72px 0 70px;
+  padding: 68px 0 74px;
 }
-.reviews-heading { max-width: 720px; text-align: center; margin: 0 auto 34px; }
+.reviews-heading { max-width: 760px; text-align: center; margin: 0 auto 30px; }
 .reviews-heading .eyebrow { color: #947321; }
-.reviews-heading h2 { color: var(--green); margin: 12px 0 11px; }
-.reviews-heading p:last-child { color: #5b695c; margin: 0; font-size: 14px; }
-.real-reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 18px;
-}
-.real-review {
-  grid-column: span 2;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: 26px 25px 22px;
-  background: #fff;
-  border: 1px solid #e3ddcc;
-  border-top: 3px solid #c7a13d;
-  border-radius: 16px;
-  box-shadow: 0 14px 30px #1734270b;
-  text-align: left;
-}
-.real-review:nth-child(4), .real-review:nth-child(5) { grid-column: span 3; }
-.real-review-quote {
-  height: 25px;
+.reviews-heading h2 { color: var(--green); margin: 12px 0 0; }
+.facebook-reviews { width: 100%; margin: 0; }
+.facebook-reviews-desktop {
   display: block;
-  color: #bba04b;
-  font: 54px/.7 Georgia,serif;
-}
-.real-review blockquote {
-  flex: 1;
-  color: #2a4134;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.72;
-  margin: 15px 0 23px;
-}
-.review-person { display: flex; align-items: center; gap: 11px; padding-top: 16px; border-top: 1px solid #ece5d5; }
-.review-initial {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  color: #e8ca70;
-  background: #1f4434;
-  border-radius: 50%;
-  font: 18px Georgia,serif;
-}
-.review-person strong { font-size: 13px; color: #234334; }
-.reviews-original {
-  max-width: 690px;
-  margin: 30px auto 0;
-  border: 1px solid #ded3b9;
-  border-radius: 12px;
-  background: #f5efe1;
   overflow: hidden;
+  background: #fff;
+  border: 1px solid #dcd5c6;
+  border-radius: 15px;
+  box-shadow: 0 20px 48px #1734271a;
 }
-.reviews-original summary { padding: 16px 22px; color: #254c38; font-size: 12px; }
-.reviews-original summary span { color: #af8c2e; }
-.reviews-original-image { padding: 12px; overflow-x: auto; }
-.reviews-original-image img { display: block; width: 100%; min-width: 790px; height: auto; border-radius: 7px; }
+.facebook-reviews-desktop img { display: block; width: 100%; height: auto; }
+.facebook-reviews-mobile { display: none; }
+.facebook-reviews figcaption {
+  margin-top: 16px;
+  color: #566858;
+  font-size: 12px;
+  text-align: center;
+}
+.facebook-reviews a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
 
 .offer-section {
   padding: 67px 0 75px;
@@ -187,8 +146,6 @@
 .impact-bottom { margin-top: 40px; padding-top: 21px; border-top: 1px solid #ffffff35; color: #c4d7c8; font-size: 12px; line-height: 1.7; text-align: center; }
 
 @media (max-width: 800px) {
-  .real-reviews-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .real-review, .real-review:nth-child(4), .real-review:nth-child(5) { grid-column: span 1; }
   .impact-layout { grid-template-columns: 1fr; }
   .impact-copy { text-align: center; }
   .impact-copy > p:not(.eyebrow) { margin-inline: auto; }
@@ -198,15 +155,24 @@
 @media (max-width: 700px) {
   .promo-banner { min-height: 66px; padding: 15px 14px; }
   .promo-banner strong { font-size: clamp(14px, 4vw, 18px); letter-spacing: 1px; }
-  .real-testimonials { padding: 43px 0 45px; }
-  .reviews-heading { margin-bottom: 24px; }
-  .reviews-heading h2 { font-size: 30px; }
-  .reviews-heading p:last-child { font-size: 13px; }
-  .real-reviews-grid { grid-template-columns: 1fr; gap: 13px; }
-  .real-review { padding: 23px 21px 19px; border-radius: 13px; }
-  .real-review blockquote { font-size: 14px; line-height: 1.65; margin-bottom: 16px; }
-  .reviews-original { margin-top: 20px; }
-  .reviews-original summary { font-size: 11px; padding: 16px 14px; }
+  .real-testimonials { padding: 43px 0 47px; }
+  .reviews-heading { margin-bottom: 23px; }
+  .reviews-heading h2 { font-size: 29px; }
+  .facebook-reviews-desktop { display: none; }
+  .facebook-reviews-mobile { display: grid; gap: 15px; }
+  .facebook-review-slice {
+    display: block;
+    aspect-ratio: 627 / 614;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #dcd5c6;
+    border-radius: 12px;
+    box-shadow: 0 12px 28px #17342712;
+  }
+  .facebook-review-slice img { display: block; width: 200%; max-width: none; height: auto; }
+  .facebook-review-slice-right { aspect-ratio: 627 / 505; }
+  .facebook-review-slice-right img { transform: translateX(-50%); }
+  .facebook-reviews figcaption { font-size: 11px; margin-top: 14px; }
   .offer-section { padding: 35px 0 50px; }
   .offer-promotion { max-width: 370px; border-radius: 13px; }
   .offer-card-focus { margin-top: 24px; padding: 29px 24px; border-radius: 15px; }

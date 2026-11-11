@@ -28,7 +28,7 @@ Copie `.env.example` para `.env.local`, ou configure as mesmas variáveis na Ver
 
 Confirmar os temas com o arquivo real do livro, substituir a capa ilustrativa se necessário, publicar os canais oficiais e a prestação de contas. Validar com a organização a destinação integral das vendas, o complemento de R$ 1,00 e o custeio separado das taxas antes de abrir as vendas. Confirmar que R$ 197,00 representa um preço de referência legítimo antes de anunciar a promoção.
 
-Os cinco relatos estáticos são transcrições da imagem `depoimentos.png` enviada pela organização, e não declarações verificadas independentemente. A versão original pode ser consultada na própria página. Não reutilizar os depoimentos de doadores do Projeto Renascer com Fé como avaliações do Grimório. A campanha da oferta usa imagens WebP responsivas em `public/`. Sem checkout validado, o botão principal permanece desativado com o rótulo “Compra disponível em breve”; o atendimento por WhatsApp permanece acessível.
+A seção de depoimentos exibe diretamente a imagem `depoimentos.png` enviada pela organização, sem edição do conteúdo ou verificação independente de autenticidade. No desktop ela aparece inteira; no celular, duas visualizações responsivas recortam visualmente suas colunas, com acesso à imagem original ao tocar. Não reutilizar os depoimentos de doadores do Projeto Renascer com Fé como avaliações do Grimório. A campanha da oferta usa imagens WebP responsivas em `public/`. Sem checkout validado, o botão principal permanece desativado com o rótulo “Compra disponível em breve”; o atendimento por WhatsApp permanece acessível.
 
 ## Meta Pixel
 

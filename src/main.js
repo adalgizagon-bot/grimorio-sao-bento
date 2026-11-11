@@ -6,14 +6,6 @@ const e = import.meta.env;
 const supportNumber = e.VITE_WHATSAPP_NUMBER || '5511942353966';
 const heart = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>';
 const whatsappIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.5-4.8A9 9 0 1 1 21 11.5Z"/><path d="M8 7c-2 4 3 9 7 8l1-2-3-1-1 1-2-2 1-1-3Z"/></svg>';
-// Depoimentos transcritos dos cinco comentários enviados pela organização.
-const testimonials = [
-  { name:'Mariana Silva', quote:'Gente, é impressionante! Eu estava depressa, sem saúde, e comecei a rezar a oração de São Bento. Em poucos dias melhorei completamente! 🙏💙' },
-  { name:'Carlos Pereira', quote:'Funciona mesmo! Minha família estava com problemas e, depois que usei o Grimório, tudo se resolveu. São Bento é misericórdia e poder! 🙌' },
-  { name:'Neusa Almeida', quote:'Recomendo de olhos fechados! Oração de São Bento tira inveja, afasta o mal e traz paz para o lar. É um santo maravilhoso! ❤️' },
-  { name:'Juliana Costa', quote:'Depois que comecei a usar o medalhão de São Bento, nada de problema em casa. É incrível o poder dele! 🙏✨' },
-  { name:'Ricardo Martins', quote:'Não é exagero não! São Bento livra mesmo! Minha empresa estava indo mal e, após a oração, tudo voltou a fluir. Deus abençoe São Bento! 🙏' },
-];
 const themes = [ ['✧','Prosperidade','Fé e esperança para novos caminhos.'],['♡','Amor e harmonia','Orações para cultivar paz e fortalecer seus vínculos.'],['◈','Vida financeira','Serenidade e sabedoria diante dos desafios.'],['↗','Renovação espiritual','Força, proteção e confiança para recomeçar.'] ];
 const faqs = [['O livro é físico?','Não. É um eBook digital.'],['Como receberei meu Grimório?','O acesso será disponibilizado após a confirmação do pagamento.'],['Minha compra ajuda o projeto?','Sim. O valor integral das vendas válidas será destinado à alimentação infantil.'],['Posso falar com alguém?',whatsappUrl(supportNumber) ? 'Sim! Nosso suporte está disponível pelo WhatsApp.' : 'Nosso canal oficial de suporte pelo WhatsApp está em configuração.']];
 document.querySelector('#app').innerHTML = `
@@ -25,17 +17,23 @@ document.querySelector('#app').innerHTML = `
 <section class="real-testimonials" id="depoimentos" aria-labelledby="real-testimonials-title">
 <div class="wrap">
   <div class="reviews-heading">
-    <p class="eyebrow">RELATOS COMPARTILHADOS</p>
-    <h2 id="real-testimonials-title">Palavras de quem vive sua fé.</h2>
-    <p>Veja experiências compartilhadas sobre as orações e a devoção a São Bento.</p>
+    <p class="eyebrow">COMENTÁRIOS DO FACEBOOK</p>
+    <h2 id="real-testimonials-title">Veja o que estão comentando sobre São Bento.</h2>
   </div>
-  <div class="real-reviews-grid">
-    ${testimonials.map((r) => '<article class="real-review"><span class="real-review-quote" aria-hidden="true">“</span><blockquote>'+r.quote+'</blockquote><div class="review-person"><span class="review-initial" aria-hidden="true">'+r.name.slice(0,1)+'</span><strong>'+r.name+'</strong></div></article>').join('')}
-  </div>
-  <details class="reviews-original">
-    <summary>Ver os depoimentos na imagem original <span aria-hidden="true">+</span></summary>
-    <div class="reviews-original-image"><img src="/depoimentos-originais.webp" alt="Imagem enviada com os cinco comentários originais sobre São Bento" width="1254" height="614" loading="lazy"></div>
-  </details>
+  <figure class="facebook-reviews">
+    <a class="facebook-reviews-desktop" href="/depoimentos-originais.webp" target="_blank" rel="noopener" aria-label="Abrir a imagem completa dos comentários para ampliar">
+      <img src="/depoimentos-originais.webp" alt="Imagem de comentários do Facebook enviada pela organização, com relatos de Mariana Silva, Carlos Pereira, Neusa Almeida, Juliana Costa e Ricardo Martins" width="1254" height="614" loading="lazy">
+    </a>
+    <div class="facebook-reviews-mobile">
+      <a class="facebook-review-slice" href="/depoimentos-originais.webp" target="_blank" rel="noopener" aria-label="Ampliar a imagem dos comentários de Mariana Silva, Neusa Almeida e Ricardo Martins">
+        <img src="/depoimentos-originais.webp" alt="Comentários de Mariana Silva, Neusa Almeida e Ricardo Martins na imagem enviada do Facebook" width="1254" height="614" loading="lazy">
+      </a>
+      <a class="facebook-review-slice facebook-review-slice-right" href="/depoimentos-originais.webp" target="_blank" rel="noopener" aria-label="Ampliar a imagem dos comentários de Carlos Pereira e Juliana Costa">
+        <img src="/depoimentos-originais.webp" alt="Comentários de Carlos Pereira e Juliana Costa na imagem enviada do Facebook" width="1254" height="614" loading="lazy">
+      </a>
+    </div>
+    <figcaption>Toque ou clique na imagem para ampliar os comentários.</figcaption>
+  </figure>
 </div></section>
 <section class="benefits wrap"><p class="eyebrow">PALAVRAS PARA OS SEUS DIAS</p><h2>Encontre palavras de fé para diferentes momentos da sua vida</h2><div class="theme-grid">${themes.map(([icon,title,desc])=>`<article class="theme"><span class="theme-icon" aria-hidden="true">${icon}</span><h3>${title}</h3><p>${desc}</p></article>`).join('')}</div></section>
 

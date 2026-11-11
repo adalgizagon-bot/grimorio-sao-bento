@@ -21,10 +21,14 @@ for(const id of ['whatsapp-hero','whatsapp-offer']) {
 assert.equal(await page.locator('#whatsapp').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(22, 128, 74)');
 assert.equal(await page.locator('.hero-stage').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(24, 58, 45)');
 assert.equal(await page.locator('.trust-line').isVisible(),false);
-assert.equal(await page.locator('.real-review').count(),5);
 assert.equal(await page.locator('.testimonial-carousel').count(),0);
-assert.ok((await page.locator('.real-testimonials').innerText()).includes('Carlos Pereira'));
-assert.equal(await page.locator('details').count(),5);
+assert.equal(await page.locator('.real-review').count(),0);
+assert.equal(await page.locator('.facebook-reviews-desktop img').count(),1);
+assert.equal(await page.locator('.facebook-review-slice img').count(),2);
+assert.equal(await page.locator('.facebook-reviews-desktop').isVisible(),width>700);
+assert.equal(await page.locator('.facebook-reviews-mobile').isVisible(),width<=700);
+assert.ok((await page.locator('.real-testimonials').innerText()).includes('COMENTÁRIOS DO FACEBOOK'));
+assert.equal(await page.locator('details').count(),4);
 assert.equal(await page.locator('.offer-promotion img').count(),1);
 assert.equal(await page.locator('.editorial').count(),0);
 assert.equal(await page.getByText(/em preparação|pendente de configuração/i).count(),0);
@@ -33,6 +37,6 @@ assert.ok(await page.locator('.impact-section').innerText().then(t=>t.includes('
 await page.locator('summary').first().click();assert.equal(await page.locator('details').first().getAttribute('open'),'');
 assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
 assert.equal(await page.locator('video,iframe').count(),0);assert.deepEqual(errors,[]);
-await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: oferta, relatos enviados, FAQ, impacto responsivo, WhatsApp e ausência de overflow`);await page.close();
+await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: oferta, imagens originais do Facebook, FAQ, impacto responsivo, WhatsApp e ausência de overflow`);await page.close();
 }
 } finally {await browser.close();}
