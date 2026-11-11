@@ -18,15 +18,6 @@
   letter-spacing: 2.8px;
   line-height: 1.3;
 }
-.promo-banner small {
-  display: block;
-  margin-top: 8px;
-  color: #ffe9c5;
-  font-size: 12px;
-  letter-spacing: 0.4px;
-}
-.promo-symbol { color: #f5d77b; font-size: 24px; }
-
 .hero-actions {
   width: min(460px, 100%);
   margin-inline: auto;
@@ -54,97 +45,6 @@
 .hero-actions .whatsapp-hero:disabled { background: #e5fff0; color: #14462e; }
 .hero-actions .whatsapp-hero svg { width: 19px; height: 19px; }
 
-.testimonials-section {
-  padding: 68px 0 58px;
-  background: #fffcf4;
-  text-align: center;
-  border-top: 1px solid #e2d8be;
-}
-.testimonials-section .eyebrow { color: #876e25; }
-.testimonials-section h2 { color: var(--green); margin-bottom: 10px; }
-.testimonials-intro {
-  max-width: 640px;
-  margin: 0 auto 32px;
-  color: #576b5b;
-}
-.testimonial-carousel {
-  max-width: 820px;
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: 46px minmax(0, 1fr) 46px;
-  align-items: center;
-  gap: 18px;
-}
-.testimonial-slides { min-width: 0; }
-.testimonial-slide {
-  min-height: 262px;
-  padding: 32px 45px 28px;
-  background: #f5f0e2;
-  border: 1px solid #ded4b9;
-  border-top: 4px solid var(--gold);
-  border-radius: 16px;
-  box-shadow: 0 12px 30px #183a2d12;
-  text-align: left;
-}
-.testimonial-slide[hidden] { display: none; }
-.testimonial-quote-mark {
-  display: block;
-  height: 35px;
-  color: #b59a48;
-  font: 70px Georgia, serif;
-  line-height: 0.8;
-}
-.testimonial-slide blockquote {
-  min-height: 75px;
-  margin: 16px 0 25px;
-  color: var(--green);
-  font: 27px/1.3 Georgia, 'Times New Roman', serif;
-}
-.testimonial-person { display: flex; align-items: center; gap: 13px; }
-.testimonial-avatar {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  background: var(--green);
-  border: 1px solid #c2a451;
-  border-radius: 50%;
-  color: #f2d678;
-  font: 19px Georgia, serif;
-}
-.testimonial-person strong { display: block; color: #244434; font-size: 13px; }
-.testimonial-person small { display: block; color: #687467; font-size: 11px; margin-top: 5px; }
-.carousel-arrow {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 1px solid #c4a958;
-  background: var(--green);
-  color: #f7e3a7;
-  font: 23px Arial, sans-serif;
-  cursor: pointer;
-  transition: transform .2s, background .2s;
-}
-.carousel-arrow:hover { background: var(--olive); transform: scale(1.06); }
-.carousel-arrow:focus-visible, .carousel-dot:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 4px;
-}
-.carousel-pagination { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 23px; }
-.carousel-dots { display: flex; gap: 8px; }
-.carousel-dot {
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: #b7c0ae;
-  cursor: pointer;
-}
-.carousel-dot.is-active { background: #9b761b; width: 23px; border-radius: 9px; }
-#testimonial-counter { color: #556f5e; font-size: 11px; }
-.testimonial-disclaimer { margin: 21px 0 0; font-size: 11px; color: #6b7265; }
-
 .old-price {
   color: #f0d5b4;
   font-size: 16px;
@@ -171,25 +71,11 @@
 @media (max-width: 700px) {
   .promo-banner { min-height: 82px; padding: 16px 14px; gap: 8px; }
   .promo-banner strong { font-size: 16px; letter-spacing: 1.1px; }
-  .promo-banner small { font-size: 10px; margin-top: 6px; }
-  .promo-symbol { font-size: 13px; }
   .hero-actions .button { min-width: 0; padding: 17px 10px; font-size: 10px; }
   .hero-actions .whatsapp-hero { font-size: 9px; }
-  .testimonials-section { padding: 47px 0 40px; }
-  .testimonials-intro { font-size: 13px; margin-bottom: 24px; }
-  .testimonial-carousel { grid-template-columns: 32px minmax(0,1fr) 32px; gap: 6px; }
-  .carousel-arrow { width: 32px; height: 38px; font-size: 18px; border-radius: 10px; }
-  .testimonial-slide { min-height: 252px; padding: 26px 18px 21px; border-radius: 12px; }
-  .testimonial-slide blockquote { font-size: 20px; min-height: 82px; margin: 12px 0 25px; }
-  .testimonial-person small { font-size: 10px; }
-  .testimonial-disclaimer { font-size: 10px; line-height: 1.6; }
   .old-price { font-size: 14px; }
   .offer-card .offer-actions .whatsapp-offer { font-size: 9px; padding: 15px 8px; }
 }
 @media (max-width: 350px) {
-  .promo-symbol { display: none; }
   .hero-actions .whatsapp-hero { font-size: 8px; gap: 6px; }
-  .testimonial-slide { padding: 23px 12px 20px; }
-  .testimonial-slide blockquote { font-size: 18px; }
 }
-@media (prefers-reduced-motion: reduce) { .carousel-arrow { transition: none; } }

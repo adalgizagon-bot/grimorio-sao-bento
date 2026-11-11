@@ -9,8 +9,9 @@ assert.equal(await page.locator('h1').count(),1);
 assert.equal(await page.locator('.offer-card').count(),1);
 assert.equal(await page.locator('.price').innerText(),'R$ 19,00');
 assert.equal(await page.locator('.old-price').innerText(),'De R$ 197,00 por apenas');
-assert.ok((await page.locator('.promo-banner').innerText()).includes('PROMOÇÃO POR TEMPO LIMITADO'));
+assert.equal((await page.locator('.promo-banner').innerText()).trim(),'PROMOÇÃO POR TEMPO LIMITADO');
 assert.equal(await page.locator('#checkout').isDisabled(),true);
+assert.equal(await page.locator('#checkout').innerText(),'COMPRA DISPONÍVEL EM BREVE');
 const whatsapp = new URL(await page.locator('#whatsapp').getAttribute('href'));
 assert.equal(whatsapp.hostname,'wa.me'); assert.equal(whatsapp.pathname,'/5511942353966');
 assert.equal(whatsapp.searchParams.get('text'),'Olá! Gostaria de saber mais sobre o Grimório de São Bento.');
@@ -19,21 +20,19 @@ for(const id of ['whatsapp-hero','whatsapp-offer']) {
 }
 assert.equal(await page.locator('#whatsapp').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(22, 128, 74)');
 assert.equal(await page.locator('.hero-stage').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(24, 58, 45)');
-assert.ok(await page.locator('.trust-line').innerText().then(t=>t.includes('Compra segura • Pagamento protegido • Produto 100% digital')));
-assert.equal(await page.locator('.offer-actions + .trust-line').count(),1);
-assert.equal(await page.locator('.testimonial-slide:visible').count(),1);
-assert.equal(await page.locator('#testimonial-counter').innerText(),'1 de 7');
-await page.locator('#testimonial-next').click();
-assert.equal(await page.locator('#testimonial-counter').innerText(),'2 de 7');
-assert.ok((await page.locator('.testimonial-slide:visible').innerText()).includes('Juliana R.'));
-await page.locator('#testimonial-prev').click();
-assert.equal(await page.locator('#testimonial-counter').innerText(),'1 de 7');
-assert.equal(await page.locator('details').count(),4);
+assert.equal(await page.locator('.trust-line').isVisible(),false);
+assert.equal(await page.locator('.real-review').count(),5);
+assert.equal(await page.locator('.testimonial-carousel').count(),0);
+assert.ok((await page.locator('.real-testimonials').innerText()).includes('Carlos Pereira'));
+assert.equal(await page.locator('details').count(),5);
+assert.equal(await page.locator('.offer-promotion img').count(),1);
+assert.equal(await page.locator('.editorial').count(),0);
+assert.equal(await page.getByText(/em preparação|pendente de configuração/i).count(),0);
 await page.locator('a[href="#oferta"]').click();await page.waitForTimeout(600);assert.equal(new URL(page.url()).hash,'#oferta');
-assert.ok(await page.locator('.transparency').innerText().then(t=>t.includes('R$ 1,00')&&t.includes('R$ 20,00')&&t.includes('100%')));
+assert.ok(await page.locator('.impact-section').innerText().then(t=>t.includes('R$ 1,00')&&t.includes('R$ 20,00')&&t.includes('100%')));
 await page.locator('summary').first().click();assert.equal(await page.locator('details').first().getAttribute('open'),'');
 assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
 assert.equal(await page.locator('video,iframe').count(),0);assert.deepEqual(errors,[]);
-await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: oferta, CTA, FAQ, transparência, WhatsApp oficial ativo, nova paleta, confiança e ausência de overflow`);await page.close();
+await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: oferta, relatos enviados, FAQ, impacto responsivo, WhatsApp e ausência de overflow`);await page.close();
 }
 } finally {await browser.close();}

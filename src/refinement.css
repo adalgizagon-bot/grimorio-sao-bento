@@ -1,0 +1,238 @@
+/* Refinamento final: leitura, prova social e impacto em telas pequenas. */
+[hidden] { display: none !important; }
+
+.promo-banner {
+  min-height: 72px;
+  padding: 16px 24px;
+  display: grid;
+  place-items: center;
+  gap: 0;
+  text-align: center;
+}
+.promo-banner strong {
+  max-width: 100%;
+  font-size: clamp(16px, 2.3vw, 25px);
+  line-height: 1.3;
+  letter-spacing: 2.3px;
+}
+
+.real-testimonials {
+  background: #fffcf4;
+  border-bottom: 1px solid #e3dac5;
+  padding: 72px 0 70px;
+}
+.reviews-heading { max-width: 720px; text-align: center; margin: 0 auto 34px; }
+.reviews-heading .eyebrow { color: #947321; }
+.reviews-heading h2 { color: var(--green); margin: 12px 0 11px; }
+.reviews-heading p:last-child { color: #5b695c; margin: 0; font-size: 14px; }
+.real-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+.real-review {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 26px 25px 22px;
+  background: #fff;
+  border: 1px solid #e3ddcc;
+  border-top: 3px solid #c7a13d;
+  border-radius: 16px;
+  box-shadow: 0 14px 30px #1734270b;
+  text-align: left;
+}
+.real-review:nth-child(4), .real-review:nth-child(5) { grid-column: span 3; }
+.real-review-quote {
+  height: 25px;
+  display: block;
+  color: #bba04b;
+  font: 54px/.7 Georgia,serif;
+}
+.real-review blockquote {
+  flex: 1;
+  color: #2a4134;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.72;
+  margin: 15px 0 23px;
+}
+.review-person { display: flex; align-items: center; gap: 11px; padding-top: 16px; border-top: 1px solid #ece5d5; }
+.review-initial {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  color: #e8ca70;
+  background: #1f4434;
+  border-radius: 50%;
+  font: 18px Georgia,serif;
+}
+.review-person strong { font-size: 13px; color: #234334; }
+.reviews-original {
+  max-width: 690px;
+  margin: 30px auto 0;
+  border: 1px solid #ded3b9;
+  border-radius: 12px;
+  background: #f5efe1;
+  overflow: hidden;
+}
+.reviews-original summary { padding: 16px 22px; color: #254c38; font-size: 12px; }
+.reviews-original summary span { color: #af8c2e; }
+.reviews-original-image { padding: 12px; overflow-x: auto; }
+.reviews-original-image img { display: block; width: 100%; min-width: 790px; height: auto; border-radius: 7px; }
+
+.offer-section {
+  padding: 67px 0 75px;
+  background: linear-gradient(180deg, #edeadc, #f7f3e8 62%, #f5f1e7);
+}
+.offer-promotion {
+  display: block;
+  max-width: 1000px;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid #b39136;
+  border-radius: 18px;
+  background: #092a1b;
+  box-shadow: 0 24px 55px #0a291b2a;
+}
+.offer-promotion img { display: block; width: 100%; height: auto; }
+.offer-card-focus {
+  width: min(100%, 560px);
+  margin: 35px auto 0;
+  padding: 40px 42px;
+  box-shadow: 0 22px 50px #08261b27;
+  position: relative;
+}
+.offer-card-focus .eyebrow { color: #ebcf7d; }
+.offer-card-focus h3 { font-size: 21px; margin: 12px 0 0; }
+.offer-card-focus .old-price { margin-top: 18px; }
+.offer-card-focus .price strong { font-size: clamp(58px, 7vw, 76px); }
+.offer-card-focus .offer-actions { gap: 14px; }
+.offer-card-focus .button { min-height: 67px; }
+.offer-card-focus .button:disabled { opacity: .85; }
+
+.impact-section {
+  background: radial-gradient(circle at 14% 12%, #214b38, #102d22 47%, #0c251b);
+  color: #fbf5e7;
+  padding: 76px 0 42px;
+  border-top: 4px solid #c5a140;
+}
+.impact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(30px, 5vw, 75px);
+}
+.impact-copy .eyebrow { color: #edcc71; }
+.impact-copy h2 {
+  font-size: clamp(30px, 3.3vw, 47px);
+  color: #fff5df;
+  margin: 15px 0 20px;
+}
+.impact-copy h2 em { color: #e9c96c; }
+.impact-copy > p:not(.eyebrow) {
+  font-size: 15px;
+  color: #dae6d9;
+  line-height: 1.85;
+  max-width: 480px;
+}
+.impact-signature { display: flex; align-items: center; gap: 12px; color: #ebcf78; margin-top: 27px; font: 17px Georgia,serif; }
+.impact-signature svg { width: 25px; height: 25px; }
+.impact-dashboard {
+  min-width: 0;
+  padding: 25px;
+  background: #f8f3e7;
+  color: var(--green);
+  border: 1px solid #e3ca81;
+  border-radius: 23px;
+  box-shadow: 0 30px 60px #0003;
+}
+.impact-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 25px 22px;
+  background: linear-gradient(115deg, #e4c45f, #f5dfa1);
+  border-radius: 16px;
+}
+.impact-primary-icon {
+  display: grid;
+  place-items: center;
+  width: 61px;
+  height: 61px;
+  border: 1px solid #98731f;
+  border-radius: 50%;
+  color: #264431;
+  flex-shrink: 0;
+}
+.impact-primary-icon svg { width: 33px; height: 33px; }
+.impact-primary > div { display: flex; align-items: center; gap: 15px; }
+.impact-primary strong { font: 700 72px/.9 Georgia,serif; color: #163729; }
+.impact-primary > div > span { font-size: 15px; font-weight: 700; line-height: 1.4; color: #284635; }
+.impact-stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 13px; }
+.impact-stat {
+  min-width: 0;
+  padding: 19px 17px;
+  background: #fffdf7;
+  border: 1px solid #e6dfcd;
+  border-radius: 13px;
+}
+.impact-stat span { display: block; color: #667765; font-size: 12px; }
+.impact-stat strong { display: block; font: 28px Georgia,serif; color: #214c37; margin-top: 9px; white-space: nowrap; }
+.impact-footnote { font-size: 12px; line-height: 1.75; color: #626c61; margin: 18px 5px 0; }
+.impact-bottom { margin-top: 40px; padding-top: 21px; border-top: 1px solid #ffffff35; color: #c4d7c8; font-size: 12px; line-height: 1.7; text-align: center; }
+
+@media (max-width: 800px) {
+  .real-reviews-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .real-review, .real-review:nth-child(4), .real-review:nth-child(5) { grid-column: span 1; }
+  .impact-layout { grid-template-columns: 1fr; }
+  .impact-copy { text-align: center; }
+  .impact-copy > p:not(.eyebrow) { margin-inline: auto; }
+  .impact-signature { justify-content: center; }
+  .impact-dashboard { max-width: 620px; margin-inline: auto; width: 100%; }
+}
+@media (max-width: 700px) {
+  .promo-banner { min-height: 66px; padding: 15px 14px; }
+  .promo-banner strong { font-size: clamp(14px, 4vw, 18px); letter-spacing: 1px; }
+  .real-testimonials { padding: 43px 0 45px; }
+  .reviews-heading { margin-bottom: 24px; }
+  .reviews-heading h2 { font-size: 30px; }
+  .reviews-heading p:last-child { font-size: 13px; }
+  .real-reviews-grid { grid-template-columns: 1fr; gap: 13px; }
+  .real-review { padding: 23px 21px 19px; border-radius: 13px; }
+  .real-review blockquote { font-size: 14px; line-height: 1.65; margin-bottom: 16px; }
+  .reviews-original { margin-top: 20px; }
+  .reviews-original summary { font-size: 11px; padding: 16px 14px; }
+  .offer-section { padding: 35px 0 50px; }
+  .offer-promotion { max-width: 370px; border-radius: 13px; }
+  .offer-card-focus { margin-top: 24px; padding: 29px 24px; border-radius: 15px; }
+  .offer-card-focus h3 { font-size: 18px; }
+  .offer-card-focus .price strong { font-size: 65px; }
+  .impact-section { padding: 52px 0 34px; }
+  .impact-copy h2 { font-size: 31px; }
+  .impact-copy > p:not(.eyebrow) { font-size: 13px; }
+  .impact-signature { font-size: 16px; margin: 20px 0 27px; }
+  .impact-dashboard { padding: 15px; border-radius: 18px; }
+  .impact-primary { padding: 18px 11px; gap: 13px; }
+  .impact-primary-icon { width: 46px; height: 46px; }
+  .impact-primary-icon svg { width: 25px; height: 25px; }
+  .impact-primary > div { gap: 10px; }
+  .impact-primary strong { font-size: 60px; }
+  .impact-primary > div > span { font-size: 12px; }
+  .impact-stat { padding: 15px 11px; }
+  .impact-stat span { font-size: 10px; }
+  .impact-stat strong { font-size: clamp(21px, 5vw, 27px); }
+  .impact-footnote { font-size: 11px; margin: 14px 3px 0; }
+  .impact-bottom { margin-top: 27px; font-size: 11px; }
+}
+@media (max-width: 350px) {
+  .promo-banner strong { font-size: 13px; }
+  .offer-card-focus { padding-inline: 18px; }
+  .impact-primary-icon { width: 39px; height: 39px; }
+  .impact-primary strong { font-size: 51px; }
+  .impact-stat strong { font-size: 20px; }
+}
