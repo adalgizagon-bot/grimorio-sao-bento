@@ -12,7 +12,7 @@ document.querySelector('#app').innerHTML = `
 <header class="promo-banner"><strong>PROMOÇÃO POR TEMPO LIMITADO</strong></header>
 <main><div class="hero-stage"><section class="hero wrap"><p class="eyebrow">FÉ QUE ACOMPANHA. AMOR QUE ALIMENTA.</p><h1>Orações poderosas para momentos de <em>fé, prosperidade, amor e transformação.</em></h1><p class="intro">Descubra uma coletânea de orações para fortalecer sua espiritualidade, renovar a esperança e buscar novos caminhos.</p>
 <div class="vsl vsl-video" id="vsl" aria-label="Apresentação em vídeo do Grimório de São Bento"></div>
-<div class="hero-actions"><a class="button hero-buy" href="#oferta">QUERO MEU GRIMÓRIO POR R$ 19,00 <span aria-hidden="true">→</span></a><button class="button whatsapp-hero" id="whatsapp-hero" disabled>${whatsappIcon} TEM ALGUMA DÚVIDA? FALE NO WHATSAPP</button></div><p class="micro">eBook digital <span>·</span> Uma compra com propósito</p></section></div>
+<div class="hero-actions"><a class="button hero-buy" id="hero-checkout" href="#oferta">QUERO MEU GRIMÓRIO POR R$ 19,00 <span aria-hidden="true">→</span></a><button class="button whatsapp-hero" id="whatsapp-hero" disabled>${whatsappIcon} TEM ALGUMA DÚVIDA? FALE NO WHATSAPP</button></div><p class="micro">eBook digital <span>·</span> Uma compra com propósito</p></section></div>
 
 <section class="real-testimonials" id="depoimentos" aria-labelledby="real-testimonials-title">
 <div class="wrap">
@@ -86,8 +86,14 @@ document.querySelector('#app').innerHTML = `
 <section class="faq wrap"><p class="eyebrow">TUDO COM CLAREZA</p><h2>Dúvidas frequentes</h2><div class="questions">${faqs.map(([q,a])=>`<details><summary>${q}<span aria-hidden="true">+</span></summary><p>${a}</p></details>`).join('')}</div></section></main>
 <footer><div class="wrap footer-grid"><div><p class="footer-brand">Grimório de São Bento</p><p>Projeto Renascer com Fé</p></div><div class="footer-links"><span id="privacy" hidden></span><span id="terms" hidden></span><a href="#suporte">Canal de suporte</a></div></div><div class="wrap footer-note">eBook 100% digital. Atendimento pelo canal oficial do Projeto Renascer com Fé.</div></footer>`;
 function activateButton(id, url) { const old = document.getElementById(id); const link = document.createElement('a'); link.id = id; link.className = old.className; link.innerHTML = old.innerHTML; link.href = url; link.rel = 'noopener noreferrer'; old.replaceWith(link); }
-const checkout = checkoutUrl(e.VITE_CHECKOUT_URL);
-if(checkout) { const button=document.getElementById('checkout'); button.innerHTML='QUERO COMPRAR E AJUDAR <span aria-hidden="true">→</span>'; activateButton('checkout',checkout); document.getElementById('trust-line').hidden=false; }
+const checkout = checkoutUrl(e.VITE_CHECKOUT_URL || 'https://pay.cakto.com.br/876y8h4_1309579');
+if(checkout) {
+  document.getElementById('hero-checkout').href=checkout;
+  const button=document.getElementById('checkout');
+  button.innerHTML='QUERO COMPRAR E AJUDAR <span aria-hidden="true">→</span>';
+  activateButton('checkout',checkout);
+  document.getElementById('trust-line').hidden=false;
+}
 const whatsapp = whatsappUrl(supportNumber);
 if(whatsapp) { for(const id of ['whatsapp','whatsapp-hero','whatsapp-offer']) activateButton(id,whatsapp); document.getElementById('whatsapp-status').textContent = 'Atendimento pelo WhatsApp oficial.'; }
 for(const [id,value] of [['privacy',e.VITE_PRIVACY_URL],['terms',e.VITE_TERMS_URL]]) { const url=httpsUrl(value); if(url) {const old=document.getElementById(id); const a=document.createElement('a'); a.textContent=id==='privacy'?'Política de Privacidade':'Termos de Compra'; a.href=url; old.replaceWith(a);} }
