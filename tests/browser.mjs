@@ -9,13 +9,19 @@ assert.equal(await page.locator('h1').count(),1);
 assert.equal(await page.locator('.offer-card').count(),1);
 assert.equal(await page.locator('.price').innerText(),'R$ 19,90');
 assert.equal(await page.locator('#checkout').isDisabled(),true);
-assert.equal(await page.locator('#whatsapp').isDisabled(),true);
+const whatsapp = new URL(await page.locator('#whatsapp').getAttribute('href'));
+assert.equal(whatsapp.hostname,'wa.me'); assert.equal(whatsapp.pathname,'/5511942353966');
+assert.equal(whatsapp.searchParams.get('text'),'Olá! Gostaria de saber mais sobre o Grimório de São Bento.');
+assert.equal(await page.locator('#whatsapp').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(22, 128, 74)');
+assert.equal(await page.locator('.hero-stage').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(24, 58, 45)');
+assert.ok(await page.locator('.trust-line').innerText().then(t=>t.includes('Compra segura • Pagamento protegido • Produto 100% digital')));
+assert.equal(await page.locator('#checkout + .trust-line').count(),1);
 assert.equal(await page.locator('details').count(),4);
 await page.locator('a[href="#oferta"]').click();await page.waitForTimeout(600);assert.equal(new URL(page.url()).hash,'#oferta');
 assert.ok(await page.locator('.transparency').innerText().then(t=>t.includes('R$ 0,10')&&t.includes('R$ 20,00')&&t.includes('100%')));
 await page.locator('summary').first().click();assert.equal(await page.locator('details').first().getAttribute('open'),'');
 assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
 assert.equal(await page.locator('video,iframe').count(),0);assert.deepEqual(errors,[]);
-await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: oferta, CTA, FAQ, transparência, destinos pendentes e ausência de overflow`);await page.close();
+await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: oferta, CTA, FAQ, transparência, WhatsApp oficial ativo, nova paleta, confiança e ausência de overflow`);await page.close();
 }
 } finally {await browser.close();}

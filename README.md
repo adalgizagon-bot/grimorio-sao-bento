@@ -22,7 +22,7 @@ A verificação de navegador usa Chromium em `/usr/bin/chromium` e gera capturas
 Copie `.env.example` para `.env.local`, ou configure as mesmas variáveis na Vercel e refaça o build. Nenhuma dessas variáveis deve conter segredos: variáveis `VITE_` são públicas.
 
 - `VITE_CHECKOUT_URL`: **novo checkout Cakto**, específico para o Grimório, com preço de R$ 19,90 e entrega do eBook configurada. Nunca reutilizar o checkout de 500 Orações. A validação de domínio não verifica produto, valor ou entrega: conferir tudo na Cakto antes de configurar. Sem URL válida, o pagamento fica desativado.
-- `VITE_WHATSAPP_NUMBER`: número oficial com país e DDD, somente dígitos. Sem número válido, suporte permanece desativado.
+- `VITE_WHATSAPP_NUMBER`: número oficial com país e DDD, somente dígitos. O padrão é `5511942353966`, informado pelo responsável. A variável permite substituir esse número; uma substituição inválida desativa o link.
 - `VITE_VSL_MP4_URL` ou `VITE_VSL_EMBED_URL`: HTTPS; MP4 tem prioridade. Usar URL própria para incorporação, sem autoplay. Sem vídeo, a página mostra uma capa provisória; não existe vídeo fictício.
 - `VITE_PRIVACY_URL` e `VITE_TERMS_URL`: links HTTPS para documentos reais, com política de reembolso e entrega digital. Enquanto ausentes, são exibidas pendências em texto, sem links vazios.
 
