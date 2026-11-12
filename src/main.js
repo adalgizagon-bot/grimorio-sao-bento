@@ -7,6 +7,7 @@ const e = import.meta.env;
 const supportNumber = e.VITE_WHATSAPP_NUMBER || '5511942353966';
 const heart = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>';
 const whatsappIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.5-4.8A9 9 0 1 1 21 11.5Z"/><path d="M8 7c-2 4 3 9 7 8l1-2-3-1-1 1-2-2 1-1-3Z"/></svg>';
+const reviews = [["Patrícia Oliveira","Comprei o grimório e em poucos dias consegui um emprego incrível! 🙏💰 É real, gente! Funciona mesmo!"],["Roberto Almeida","Depois que comecei a fazer as orações de São Bento, minha vida financeira melhorou 100%! Obrigado, São Bento!"],["Juliana Santos","Consegui o amor que sempre sonhei! ❤️ São Bento mudou minha vida!"],["Carlos Henrique","Minha saúde estava péssima, mas após as orações, me sinto renovado. Milagre mesmo!"],["Camila Souza","Usei o grimório para abrir meus caminhos e conquistei uma grande promoção no trabalho. Só gratidão! 🙏✨"],["Mariana Silva","Gente, é impressionante! Eu estava depressa, sem saúde, e comecei a rezar a oração de São Bento. Em poucos dias melhorei completamente! 🙏💙"],["Carlos Pereira","Funciona mesmo! Minha família estava com problemas e, depois que usei o Grimório, tudo se resolveu. São Bento é misericórdia e poder! 🙌"],["Neusa Almeida","Recomendo de olhos fechados! Oração de São Bento tira inveja, afasta o mal e traz paz para o lar. É um santo maravilhoso! ❤️"],["Juliana Costa","Depois que comecei a usar o medalhão de São Bento, nada de problema em casa. É incrível o poder dele! 🙏✨"],["Ricardo Martins","Não é exagero não! São Bento livra mesmo! Minha empresa estava indo mal e, após a oração, tudo voltou a fluir. Deus abençoe São Bento! 🙏"]];
 const themes = [ ['✧','Prosperidade','Fé e esperança para novos caminhos.'],['♡','Amor e harmonia','Orações para cultivar paz e fortalecer seus vínculos.'],['◈','Vida financeira','Serenidade e sabedoria diante dos desafios.'],['↗','Renovação espiritual','Força, proteção e confiança para recomeçar.'] ];
 const faqs = [['O livro é físico?','Não. É um eBook digital.'],['Como receberei meu Grimório?','O acesso será disponibilizado após a confirmação do pagamento.'],['Minha compra ajuda o projeto?','Sim. O valor integral das vendas válidas será destinado à alimentação infantil.'],['Posso falar com alguém?',whatsappUrl(supportNumber) ? 'Sim! Nosso suporte está disponível pelo WhatsApp.' : 'Nosso canal oficial de suporte pelo WhatsApp está em configuração.']];
 document.querySelector('#app').innerHTML = `
@@ -18,15 +19,10 @@ document.querySelector('#app').innerHTML = `
 </section></div>
 <section class="real-testimonials" id="depoimentos" aria-label="Relatos de clientes">
   <div class="wrap reviews-compact">
-    <figure class="facebook-reviews">
-      <a class="facebook-reviews-desktop" href="/depoimentos-originais.webp" target="_blank" rel="noopener" aria-label="Ampliar os relatos enviados por clientes">
-        <img src="/depoimentos-originais.webp" alt="Relatos de clientes sobre a oração de São Bento" width="1254" height="614" loading="lazy">
-      </a>
-      <a class="facebook-reviews-mobile" href="/depoimentos-originais.webp" target="_blank" rel="noopener" aria-label="Ampliar os relatos enviados por clientes">
-        <img src="/depoimentos-originais.webp" alt="Relatos de clientes sobre a oração de São Bento" width="1254" height="614" loading="lazy">
-      </a>
-      <figcaption>Relatos de clientes. Experiências pessoais não garantem resultados iguais.</figcaption>
-    </figure>
+    <div class="reviews-strip" role="list" aria-label="Depoimentos de clientes">
+      ${reviews.map(([name,message])=>`<article class="review-card" role="listitem"><div class="review-person"><span class="review-avatar" aria-hidden="true">${name.split(' ').slice(0,2).map(part=>part[0]).join('')}</span><strong>${name}</strong></div><p>${message}</p></article>`).join('')}
+    </div>
+    <p class="review-note">Relatos compartilhados por clientes. Experiências pessoais podem variar e não garantem resultados iguais.</p>
   </div>
 </section>
 <section class="instant-purchase" id="comprar-agora">
