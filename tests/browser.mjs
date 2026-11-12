@@ -30,14 +30,14 @@ assert.equal(await page.locator('video,iframe').count(),1);
 assert.equal(await page.locator('#vsl').evaluate(el=>getComputedStyle(el).aspectRatio),'9 / 16');
 assert.equal(await page.locator('.testimonial-carousel').count(),0);
 assert.equal(await page.locator('.real-review').count(),0);
-assert.equal(await page.locator('.facebook-reviews-desktop img').count(),1);
-assert.equal(await page.locator('.facebook-reviews-mobile img').count(),1);
+assert.equal(await page.locator('.review-card').count(),10);
+assert.ok((await page.locator('.review-card').first().innerText()).includes('Patrícia Oliveira'));
+assert.ok((await page.locator('.review-card').last().innerText()).includes('Ricardo Martins'));
 assert.equal(await page.locator('.reviews-heading').count(),0);
 assert.equal(await page.locator('.quick-purchase-inner').count(),1);
 assert.deepEqual(await page.locator('main > *').evaluateAll(els=>els.slice(0,4).map(el=>el.className)),['hero-stage','real-testimonials','instant-purchase','benefits wrap']);
-assert.equal(await page.locator('.facebook-reviews-desktop').isVisible(),width>700);
-assert.equal(await page.locator('.facebook-reviews-mobile').isVisible(),width<=700);
-assert.ok((await page.locator('.real-testimonials').innerText()).includes('Relatos de clientes'));
+assert.equal(await page.locator('.reviews-strip').isVisible(),true);
+assert.ok((await page.locator('.real-testimonials').innerText()).includes('Relatos compartilhados por clientes'));
 assert.ok((await page.locator('.quick-trust').innerText()).includes('Compra segura'));
 assert.equal(await page.locator('details').count(),4);
 assert.equal(await page.locator('.offer-promotion img').count(),1);
@@ -55,6 +55,6 @@ assert.equal(playerUrl.searchParams.get('preload'),'false');
 assert.equal(playerUrl.searchParams.get('autoplay'),'false');
 assert.equal(await iframe.getAttribute('loading'),'lazy');
 assert.deepEqual(errors,[]);
-await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: vídeo, depoimentos logo abaixo, CTAs, FAQ, WhatsApp e ausência de overflow`);await page.close();
+await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: vídeo, 10 depoimentos, CTAs, FAQ, WhatsApp e ausência de overflow`);await page.close();
 }
 } finally {await browser.close();}
