@@ -18,10 +18,17 @@ document.querySelector('#app').innerHTML = `
 </section></div>
 <section class="real-testimonials" id="depoimentos" aria-label="Depoimentos de clientes">
   <div class="wrap reviews-compact">
-    <figure class="testimonials-original">
-      <a href="/depoimentos-originais.webp" target="_blank" rel="noopener noreferrer" aria-label="Ampliar a imagem original dos depoimentos">
-        <img src="/depoimentos-originais.webp" alt="Imagem original com depoimentos de clientes sobre o Grimório de São Bento" width="1254" height="614" loading="lazy" decoding="async">
-      </a>
+    <figure class="testimonials-sliced">
+      <div class="testimonials-desktop">
+        <a class="testimonial-strip testimonial-strip-top" href="/depoimentos-novos.avif" target="_blank" rel="noopener noreferrer" aria-label="Ampliar a primeira faixa dos depoimentos originais"></a>
+        <a class="testimonial-strip testimonial-strip-bottom" href="/depoimentos-novos.avif" target="_blank" rel="noopener noreferrer" aria-label="Ampliar a segunda faixa dos depoimentos originais"></a>
+      </div>
+      <div class="testimonials-mobile">
+        <a class="testimonial-quadrant quadrant-1" href="/depoimentos-novos.avif" target="_blank" rel="noopener noreferrer" aria-label="Ampliar os depoimentos de Patrícia, Juliana e Camila"></a>
+        <a class="testimonial-quadrant quadrant-2" href="/depoimentos-novos.avif" target="_blank" rel="noopener noreferrer" aria-label="Ampliar os depoimentos de Roberto e Carlos"></a>
+        <a class="testimonial-quadrant quadrant-3" href="/depoimentos-novos.avif" target="_blank" rel="noopener noreferrer" aria-label="Ampliar os depoimentos de Mariana, Neusa e Ricardo"></a>
+        <a class="testimonial-quadrant quadrant-4" href="/depoimentos-novos.avif" target="_blank" rel="noopener noreferrer" aria-label="Ampliar os depoimentos de Carlos e Juliana"></a>
+      </div>
     </figure>
   </div>
 </section>

@@ -31,12 +31,19 @@ assert.equal(await page.locator('#vsl').evaluate(el=>getComputedStyle(el).aspect
 assert.equal(await page.locator('.testimonial-carousel').count(),0);
 assert.equal(await page.locator('.real-review').count(),0);
 assert.equal(await page.locator('.review-card').count(),0);
-assert.equal(await page.locator('.testimonials-original img').count(),1);
-assert.equal(await page.locator('.testimonials-original img').getAttribute('src'),'/depoimentos-originais.webp');
+assert.equal(await page.locator('.testimonials-original').count(),0);
+assert.equal(await page.locator('.testimonial-strip').count(),2);
+assert.equal(await page.locator('.testimonial-quadrant').count(),4);
+assert.equal(await page.locator('.testimonials-desktop').isVisible(),width>700);
+assert.equal(await page.locator('.testimonials-mobile').isVisible(),width<=700);
+const imgResponse=await page.request.get('http://localhost:4173/depoimentos-novos.avif');
+assert.equal(imgResponse.status(),200);
+assert.match(imgResponse.headers()['content-type']||'',/image\/avif/);
+assert.equal(await page.locator('.testimonials-sliced a[href="/depoimentos-novos.avif"]').count(),6);
 assert.equal(await page.locator('.reviews-heading').count(),0);
 assert.equal(await page.locator('.quick-purchase-inner').count(),1);
 assert.deepEqual(await page.locator('main > *').evaluateAll(els=>els.slice(0,4).map(el=>el.className)),['hero-stage','real-testimonials','instant-purchase','benefits wrap']);
-assert.equal(await page.locator('.testimonials-original img').isVisible(),true);
+assert.equal(await page.locator(width>700?'.testimonial-strip-top':'.quadrant-1').isVisible(),true);
 assert.equal((await page.locator('.real-testimonials').innerText()).trim(),'');
 assert.ok((await page.locator('.quick-trust').innerText()).includes('Compra segura'));
 assert.equal(await page.locator('details').count(),4);
@@ -55,6 +62,6 @@ assert.equal(playerUrl.searchParams.get('preload'),'false');
 assert.equal(playerUrl.searchParams.get('autoplay'),'false');
 assert.equal(await iframe.getAttribute('loading'),'lazy');
 assert.deepEqual(errors,[]);
-await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: vídeo, imagem original de depoimentos, CTAs, FAQ, WhatsApp e ausência de overflow`);await page.close();
+await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: vídeo, imagem correta recortada para mobile, CTAs, FAQ, WhatsApp e ausência de overflow`);await page.close();
 }
 } finally {await browser.close();}

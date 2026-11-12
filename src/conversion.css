@@ -138,16 +138,40 @@
   .benefits h2 { font-size: clamp(26px, 6.3vw, 32px); }
   .offer-section { padding-top: 30px; }
 }
-
-/* Imagem original dos depoimentos: sem cards, recortes ou reescrita. */
+/* Recortes responsivos da imagem original mais recente, sem alterar o conteúdo dos relatos. */
 .real-testimonials { padding: 14px 0 12px; background: #f8f5ec; border-bottom: none; }
-.reviews-compact { width: min(1040px, calc(100% - 32px)); max-width: 1040px; }
-.testimonials-original { padding: 0; margin: 0; }
-.testimonials-original a { display: block; border-radius: 11px; overflow: hidden; border: 1px solid #dfd8c9; box-shadow: 0 9px 27px #09231b1c; }
-.testimonials-original a:focus-visible { outline: 3px solid #d4af37; outline-offset: 4px; }
-.testimonials-original img { display: block; width: 100%; max-width: 100%; height: auto; object-fit: contain; }
+.reviews-compact { width: min(1050px, calc(100% - 32px)); max-width: 1050px; }
+.testimonials-sliced { margin: 0; padding: 0; }
+.testimonials-desktop { display: grid; gap: 12px; }
+.testimonials-mobile { display: none; }
+.testimonial-strip, .testimonial-quadrant {
+  display: block;
+  background-image: url('/depoimentos-novos.avif');
+  background-repeat: no-repeat;
+  background-color: #fff;
+  border: 1px solid #e1d8c9;
+  border-radius: 10px;
+  box-shadow: 0 9px 25px #09231b18;
+  overflow: hidden;
+  outline-offset: 3px;
+}
+.testimonial-strip { aspect-ratio: 1170 / 619; background-size: 100% 200%; }
+.testimonial-strip-top { background-position: center top; }
+.testimonial-strip-bottom { background-position: center bottom; }
+.testimonial-strip:focus-visible, .testimonial-quadrant:focus-visible { outline: 3px solid #d4af37; }
 @media (max-width: 700px) {
   .real-testimonials { padding: 10px 0 8px; }
   .reviews-compact { width: calc(100% - 16px); }
-  .testimonials-original a { border-radius: 7px; box-shadow: 0 5px 14px #09231b14; }
+  .testimonials-desktop { display: none; }
+  .testimonials-mobile { display: grid; gap: 10px; }
+  .testimonial-quadrant {
+    aspect-ratio: 585 / 619;
+    background-size: 200% 200%;
+    border-radius: 7px;
+    box-shadow: 0 5px 14px #09231b12;
+  }
+  .quadrant-1 { background-position: left top; }
+  .quadrant-2 { background-position: right top; }
+  .quadrant-3 { background-position: left bottom; }
+  .quadrant-4 { background-position: right bottom; }
 }
