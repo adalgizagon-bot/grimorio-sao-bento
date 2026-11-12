@@ -14,7 +14,7 @@ document.querySelector('#app').innerHTML = `
 <header class="promo-banner"><strong>PROMOÇÃO POR TEMPO LIMITADO</strong></header>
 <main>
 <div class="hero-stage"><section class="hero wrap">
-<h1>Veja como a poderosa <em>oração de São Bento</em> vem tocando vidas — e pode inspirar a sua também.</h1>
+<h1>Veja como a poderosa <em>oração de São Bento</em> vem mudando vidas — e pode inspirar uma nova fase na sua também.</h1>
 <div class="vsl vsl-video" id="vsl" aria-label="Apresentação em vídeo do Grimório de São Bento"></div>
 </section></div>
 <section class="real-testimonials" id="depoimentos" aria-label="Relatos de clientes">
