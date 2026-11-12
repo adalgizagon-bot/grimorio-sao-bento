@@ -28,7 +28,8 @@ Copie `.env.example` para `.env.local`, ou configure as mesmas variáveis na Ver
 
 Confirmar os temas com o arquivo real do livro, substituir a capa ilustrativa se necessário, publicar os canais oficiais e a prestação de contas. Validar com a organização a destinação integral das vendas, o complemento de R$ 1,00 e o custeio separado das taxas antes de abrir as vendas. Confirmar que R$ 197,00 representa um preço de referência legítimo antes de anunciar a promoção.
 
-A seção de depoimentos exibe diretamente a imagem `depoimentos.png` enviada pela organização, sem edição do conteúdo ou verificação independente de autenticidade. No desktop ela aparece inteira; no celular, duas visualizações responsivas recortam visualmente suas colunas, com acesso à imagem original ao tocar. Não reutilizar os depoimentos de doadores do Projeto Renascer com Fé como avaliações do Grimório. A campanha da oferta usa imagens WebP responsivas em `public/`. Os botões de compra apontam para a Cakto e o atendimento por WhatsApp permanece acessível.
+A página agora começa com uma chamada breve e a VSL. Logo em seguida, dez relatos fornecidos pela organização são apresentados em cartões horizontais responsivos, sem simular quantidades de curtidas, avaliações ou comentários. Os relatos refletem experiências individuais e não garantem resultados semelhantes. Abaixo dos relatos aparecem o botão de compra vermelho bordô, informações de pagamento digital e o botão verde do WhatsApp. A seção seguinte apresenta os temas das orações; depois vem a oferta única e as informações solidárias. Os textos da oferta continuam em R$ 19,00, conforme preço atualizado pela organização em novembro de 2026.
+
 
 ## Meta Pixel
 
