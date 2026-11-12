@@ -1,0 +1,139 @@
+/* Refinamento comercial: contraste, nova chamada e oferta com vídeo. */
+.hero-stage .hero h1 { max-width: 980px; text-wrap: balance; }
+.hero-stage .hero h1 em { color: #f2d174; }
+.hero-stage .hero h1 .change-word {
+  display: inline-block;
+  padding: .035em .16em .08em;
+  margin-inline: .03em;
+  border-radius: .12em;
+  color: #17392c;
+  background: linear-gradient(180deg, #ffe6a0 0%, #e2ac36 100%);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .88em;
+  font-weight: 900;
+  font-style: normal;
+  letter-spacing: -.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  box-shadow: inset 0 -3px 0 #b78314, 0 3px 12px #061a123d;
+}
+.benefits { padding-block: clamp(40px, 5vw, 70px); }
+.benefits h2 {
+  max-width: 1040px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(27px, 3.6vw, 44px);
+  font-weight: 700;
+  line-height: 1.18;
+  color: #183a2d;
+  text-transform: uppercase;
+}
+.benefits h2 em { color: #8d212a; font-style: italic; text-transform: none; }
+.benefits .theme {
+  border-top: 4px solid #d4af37;
+  background: #fffdf7;
+  box-shadow: 0 10px 26px #102b2010;
+}
+.benefits .theme h3 { font-size: 17px; font-weight: 800; }
+.benefits .theme p { font-size: 13px; line-height: 1.65; }
+.benefits .theme-icon { font-size: 30px; color: #86232c; }
+.offer-section {
+  padding: clamp(45px, 5vw, 75px) 0 78px;
+  background: linear-gradient(180deg, #f4efdf 0%, #e9e4d5 100%);
+}
+.offer-video-heading {
+  max-width: 760px;
+  margin: 0 auto 25px;
+  text-align: center;
+}
+.offer-video-kicker {
+  display: block;
+  color: #9e7122;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+.offer-video-heading h2 {
+  color: #183a2d;
+  margin: 14px 0;
+  font-size: clamp(30px, 3.5vw, 44px);
+  font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.offer-video-heading h2 em { color: #8c232b; }
+.offer-section .testimony-video.vsl {
+  display: flex;
+  aspect-ratio: 9 / 16;
+  width: min(380px, 100%);
+  max-width: 380px;
+  margin: 0 auto 32px;
+  border: 2px solid #d1a842;
+  border-radius: 16px;
+  box-shadow: 0 16px 42px #0c291c31;
+  background: #0a271b;
+}
+.offer-section .testimony-video iframe { width:100%;height:100%; border:0; display:block; }
+.offer-card-focus {
+  width: min(100%, 600px);
+  margin: 0 auto;
+  padding: 38px clamp(22px, 4vw, 47px);
+  border-radius: 20px;
+  background: #183a2d;
+  border: 2px solid #d4af37;
+  box-shadow: 0 23px 55px #12322536;
+}
+.offer-card-focus .old-price {
+  color: #f5ebd2;
+  font-size: 19px;
+  font-weight: 500;
+  margin-top: 22px;
+}
+.offer-card-focus .old-price s { color: #ffd5c1; text-decoration-thickness: 2px; }
+.offer-card-focus .price {
+  color: #fbe28c;
+  margin: 2px 0 0;
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+.offer-card-focus .price strong {
+  color: #ffe08a;
+  font-size: clamp(65px, 7vw, 88px);
+  font-weight: 800;
+  letter-spacing: -.055em;
+}
+.offer-card-focus .installments {
+  margin: 7px 0 0;
+  color: #fff7e8;
+  font-size: 18px;
+  line-height: 1.55;
+}
+.offer-card-focus .installments strong { color: #ffe08a; font-size: 20px; }
+.offer-card-focus .payment-note {
+  margin: 3px 0 11px;
+  color: #d2ddcf;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.offer-card-focus .price-note { margin-top: 10px; font-size: 12px; }
+.offer-card-focus ul { margin-top: 14px; }
+.offer-card-focus li { font-size: 14px; }
+.offer-card-focus .offer-actions { margin-top: 21px; }
+.offer-card-focus .trust-line { margin-top: 16px; }
+@media(max-width:700px){
+  .hero-stage .hero h1 .change-word { padding: .04em .12em .07em; font-size: .87em; }
+  .benefits h2 { font-size: clamp(25px, 6.4vw, 34px); }
+  .benefits .theme h3 { font-size: 15px; }
+  .benefits .theme p { font-size: 12px; }
+  .offer-section { padding-block: 43px 54px; }
+  .offer-video-heading { margin-bottom: 19px; }
+  .offer-video-heading h2 { font-size: clamp(26px, 7vw, 35px); }
+  .offer-video-kicker { font-size: 10px; letter-spacing: 1.6px; }
+  .offer-section .testimony-video.vsl { width:min(100%,360px); margin-bottom: 24px; border-radius: 12px; }
+  .offer-card-focus { padding: 29px 22px; }
+  .offer-card-focus .old-price { font-size: 16px; }
+  .offer-card-focus .price strong { font-size: 67px; }
+  .offer-card-focus .installments { font-size: 16px; }
+  .offer-card-focus .installments strong { font-size: 18px; }
+  .offer-card-focus li { font-size: 13px; }
+}
