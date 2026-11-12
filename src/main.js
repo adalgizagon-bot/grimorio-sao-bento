@@ -10,32 +10,34 @@ const themes = [ ['✧','Prosperidade','Fé e esperança para novos caminhos.'],
 const faqs = [['O livro é físico?','Não. É um eBook digital.'],['Como receberei meu Grimório?','O acesso será disponibilizado após a confirmação do pagamento.'],['Minha compra ajuda o projeto?','Sim. O valor integral das vendas válidas será destinado à alimentação infantil.'],['Posso falar com alguém?',whatsappUrl(supportNumber) ? 'Sim! Nosso suporte está disponível pelo WhatsApp.' : 'Nosso canal oficial de suporte pelo WhatsApp está em configuração.']];
 document.querySelector('#app').innerHTML = `
 <header class="promo-banner"><strong>PROMOÇÃO POR TEMPO LIMITADO</strong></header>
-<main><div class="hero-stage"><section class="hero wrap"><p class="eyebrow">FÉ QUE ACOMPANHA. AMOR QUE ALIMENTA.</p><h1>Orações poderosas para momentos de <em>fé, prosperidade, amor e transformação.</em></h1><p class="intro">Descubra uma coletânea de orações para fortalecer sua espiritualidade, renovar a esperança e buscar novos caminhos.</p>
+<main>
+<div class="hero-stage"><section class="hero wrap">
+<h1>Veja como a poderosa <em>oração de São Bento</em> vem tocando vidas — e pode inspirar a sua também.</h1>
 <div class="vsl vsl-video" id="vsl" aria-label="Apresentação em vídeo do Grimório de São Bento"></div>
-<div class="hero-actions"><a class="button hero-buy" id="hero-checkout" href="#oferta">QUERO MEU GRIMÓRIO POR R$ 19,00 <span aria-hidden="true">→</span></a><button class="button whatsapp-hero" id="whatsapp-hero" disabled>${whatsappIcon} TEM ALGUMA DÚVIDA? FALE NO WHATSAPP</button></div><p class="micro">eBook digital <span>·</span> Uma compra com propósito</p></section></div>
-
-<section class="real-testimonials" id="depoimentos" aria-labelledby="real-testimonials-title">
-<div class="wrap">
-  <div class="reviews-heading">
-    <p class="eyebrow">COMENTÁRIOS DO FACEBOOK</p>
-    <h2 id="real-testimonials-title">Veja o que estão comentando sobre São Bento.</h2>
+</section></div>
+<section class="real-testimonials" id="depoimentos" aria-label="Relatos de clientes">
+  <div class="wrap reviews-compact">
+    <figure class="facebook-reviews">
+      <a class="facebook-reviews-desktop" href="/depoimentos-originais.webp" target="_blank" rel="noopener" aria-label="Ampliar os relatos enviados por clientes">
+        <img src="/depoimentos-originais.webp" alt="Relatos de clientes sobre a oração de São Bento" width="1254" height="614" loading="lazy">
+      </a>
+      <a class="facebook-reviews-mobile" href="/depoimentos-originais.webp" target="_blank" rel="noopener" aria-label="Ampliar os relatos enviados por clientes">
+        <img src="/depoimentos-originais.webp" alt="Relatos de clientes sobre a oração de São Bento" width="1254" height="614" loading="lazy">
+      </a>
+      <figcaption>Relatos de clientes. Experiências pessoais não garantem resultados iguais.</figcaption>
+    </figure>
   </div>
-  <figure class="facebook-reviews">
-    <a class="facebook-reviews-desktop" href="/depoimentos-originais.webp" target="_blank" rel="noopener" aria-label="Abrir a imagem completa dos comentários para ampliar">
-      <img src="/depoimentos-originais.webp" alt="Imagem de comentários do Facebook enviada pela organização, com relatos de Mariana Silva, Carlos Pereira, Neusa Almeida, Juliana Costa e Ricardo Martins" width="1254" height="614" loading="lazy">
-    </a>
-    <div class="facebook-reviews-mobile">
-      <a class="facebook-review-slice" href="/depoimentos-originais.webp" target="_blank" rel="noopener" aria-label="Ampliar a imagem dos comentários de Mariana Silva, Neusa Almeida e Ricardo Martins">
-        <img src="/depoimentos-originais.webp" alt="Comentários de Mariana Silva, Neusa Almeida e Ricardo Martins na imagem enviada do Facebook" width="1254" height="614" loading="lazy">
-      </a>
-      <a class="facebook-review-slice facebook-review-slice-right" href="/depoimentos-originais.webp" target="_blank" rel="noopener" aria-label="Ampliar a imagem dos comentários de Carlos Pereira e Juliana Costa">
-        <img src="/depoimentos-originais.webp" alt="Comentários de Carlos Pereira e Juliana Costa na imagem enviada do Facebook" width="1254" height="614" loading="lazy">
-      </a>
-    </div>
-    <figcaption>Toque ou clique na imagem para ampliar os comentários.</figcaption>
-  </figure>
-</div></section>
-<section class="benefits wrap"><p class="eyebrow">PALAVRAS PARA OS SEUS DIAS</p><h2>Encontre palavras de fé para diferentes momentos da sua vida</h2><div class="theme-grid">${themes.map(([icon,title,desc])=>`<article class="theme"><span class="theme-icon" aria-hidden="true">${icon}</span><h3>${title}</h3><p>${desc}</p></article>`).join('')}</div></section>
+</section>
+<section class="instant-purchase" id="comprar-agora">
+  <div class="wrap quick-purchase-inner">
+    <p class="quick-offer">Seu Grimório digital por <strong>R$ 19,00</strong></p>
+    <a class="button hero-buy quick-buy" id="hero-checkout" href="#oferta">QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span></a>
+    <p class="quick-trust">Compra segura • Pagamento protegido • Produto 100% digital</p>
+    <button class="button whatsapp-hero quick-whatsapp" id="whatsapp-hero" disabled>${whatsappIcon} FALAR NO WHATSAPP</button>
+  </div>
+</section>
+<section class="benefits wrap"><p class="eyebrow">FÉ PARA TODOS OS MOMENTOS</p><h2>Saúde, paz, amor e prosperidade: encontre orações para acompanhar a sua vida</h2><div class="theme-grid">${themes.map(([icon,title,desc])=>`<article class="theme"><span class="theme-icon" aria-hidden="true">${icon}</span><h3>${title}</h3><p>${desc}</p></article>`).join('')}</div></section>
+
 
 
 <section class="offer-section" id="oferta">
@@ -90,7 +92,7 @@ const checkout = checkoutUrl(e.VITE_CHECKOUT_URL || 'https://pay.cakto.com.br/87
 if(checkout) {
   document.getElementById('hero-checkout').href=checkout;
   const button=document.getElementById('checkout');
-  button.innerHTML='QUERO COMPRAR E AJUDAR <span aria-hidden="true">→</span>';
+  button.innerHTML='QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span>';
   activateButton('checkout',checkout);
   document.getElementById('trust-line').hidden=false;
 }
