@@ -13,7 +13,9 @@ assert.equal((await page.locator('.promo-banner').innerText()).trim(),'PROMOÇÃ
 const checkout='https://pay.cakto.com.br/876y8h4_1309579';
 assert.equal(await page.locator('#checkout').getAttribute('href'),checkout);
 assert.equal(await page.locator('#hero-checkout').getAttribute('href'),checkout);
-assert.equal((await page.locator('#checkout').innerText()).trim(),'QUERO COMPRAR E AJUDAR →');
+assert.equal((await page.locator('#checkout').innerText()).trim(),'QUERO MUDAR MINHA VIDA →');
+assert.ok((await page.locator('h1').innerText()).includes('oração de São Bento'));
+assert.equal((await page.locator('#hero-checkout').innerText()).trim(),'QUERO MUDAR MINHA VIDA →');
 const whatsapp = new URL(await page.locator('#whatsapp').getAttribute('href'));
 assert.equal(whatsapp.hostname,'wa.me'); assert.equal(whatsapp.pathname,'/5511942353966');
 assert.equal(whatsapp.searchParams.get('text'),'Olá! Gostaria de saber mais sobre o Grimório de São Bento.');
@@ -29,10 +31,14 @@ assert.equal(await page.locator('#vsl').evaluate(el=>getComputedStyle(el).aspect
 assert.equal(await page.locator('.testimonial-carousel').count(),0);
 assert.equal(await page.locator('.real-review').count(),0);
 assert.equal(await page.locator('.facebook-reviews-desktop img').count(),1);
-assert.equal(await page.locator('.facebook-review-slice img').count(),2);
+assert.equal(await page.locator('.facebook-reviews-mobile img').count(),1);
+assert.equal(await page.locator('.reviews-heading').count(),0);
+assert.equal(await page.locator('.quick-purchase-inner').count(),1);
+assert.deepEqual(await page.locator('main > *').evaluateAll(els=>els.slice(0,4).map(el=>el.className)),['hero-stage','real-testimonials','instant-purchase','benefits wrap']);
 assert.equal(await page.locator('.facebook-reviews-desktop').isVisible(),width>700);
 assert.equal(await page.locator('.facebook-reviews-mobile').isVisible(),width<=700);
-assert.ok((await page.locator('.real-testimonials').innerText()).includes('COMENTÁRIOS DO FACEBOOK'));
+assert.ok((await page.locator('.real-testimonials').innerText()).includes('Relatos de clientes'));
+assert.ok((await page.locator('.quick-trust').innerText()).includes('Compra segura'));
 assert.equal(await page.locator('details').count(),4);
 assert.equal(await page.locator('.offer-promotion img').count(),1);
 assert.equal(await page.locator('.editorial').count(),0);
@@ -49,6 +55,6 @@ assert.equal(playerUrl.searchParams.get('preload'),'false');
 assert.equal(playerUrl.searchParams.get('autoplay'),'false');
 assert.equal(await iframe.getAttribute('loading'),'lazy');
 assert.deepEqual(errors,[]);
-await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: oferta, imagens originais do Facebook, FAQ, impacto responsivo, WhatsApp e ausência de overflow`);await page.close();
+await page.screenshot({path:`/tmp/grimorio-${width}.png`,fullPage:true});console.log(`PASS ${width}px: vídeo, depoimentos logo abaixo, CTAs, FAQ, WhatsApp e ausência de overflow`);await page.close();
 }
 } finally {await browser.close();}
