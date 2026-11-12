@@ -1,0 +1,140 @@
+/* Ajustes de conversão: vídeo → depoimentos → ações → benefícios. */
+.hero-stage .hero {
+  padding-top: clamp(24px, 3vw, 43px);
+  padding-bottom: 14px;
+}
+.hero-stage .hero h1 {
+  max-width: 900px;
+  font-size: clamp(30px, 4vw, 57px);
+  line-height: 1.13;
+  letter-spacing: -0.028em;
+  margin: 4px auto 24px;
+  text-wrap: balance;
+}
+.hero-stage .hero h1 em { color: #f5ce67; }
+.hero-stage .vsl.vsl-video { margin-bottom: 10px; }
+.real-testimonials {
+  padding: 15px 0 8px;
+  background: #f8f5ec;
+  border-bottom: none;
+}
+.reviews-compact { max-width: 1000px; }
+.facebook-reviews { margin: 0; }
+.facebook-reviews-desktop {
+  border: 1px solid #e5dcc6;
+  box-shadow: 0 12px 26px #0b25140e;
+  border-radius: 11px;
+}
+.facebook-reviews-mobile { display: none; }
+.facebook-reviews-mobile img { width: 100%; max-width: 100%; height: auto; display: block; }
+.facebook-reviews figcaption {
+  font-size: 11px;
+  color: #6f6b63;
+  line-height: 1.5;
+  margin: 7px 0 0;
+}
+.instant-purchase {
+  padding: 20px 0 36px;
+  background: #f8f5ec;
+  border-bottom: 1px solid #e1d7c0;
+}
+.quick-purchase-inner {
+  width: min(570px, calc(100% - 36px));
+  display: grid;
+  justify-items: stretch;
+  gap: 10px;
+  text-align: center;
+}
+.quick-offer {
+  color: #203b2b;
+  font-size: clamp(15px, 2.1vw, 19px);
+  font-weight: 600;
+  margin: 1px 0 5px;
+}
+.quick-offer strong { color: #a3232c; font-size: 1.25em; }
+.quick-purchase-inner .button,
+.offer-card .offer-actions .button { width: 100%; font-weight: 800; }
+#hero-checkout,
+.offer-card .offer-actions #checkout {
+  color: #fff;
+  background: #a6232c;
+  background-image: linear-gradient(135deg, #bd2d37, #8d1a24);
+  border: 1px solid #db8581;
+  border-radius: 11px;
+  box-shadow: 0 5px 0 #6c111c, 0 13px 25px #75192327;
+  min-height: 68px;
+  font-size: clamp(14px, 2vw, 18px);
+  letter-spacing: 0.3px;
+  padding: 15px 21px;
+}
+#hero-checkout:hover,
+.offer-card .offer-actions #checkout:hover {
+  color: #fff;
+  background: #b82d38;
+  background-image: linear-gradient(135deg, #cb3843, #94212c);
+  box-shadow: 0 6px 0 #6c111c, 0 13px 25px #75192333;
+}
+.quick-trust {
+  color: #536254;
+  font-size: 11px;
+  line-height: 1.4;
+  margin: 2px auto 6px;
+}
+.quick-purchase-inner #whatsapp-hero,
+.offer-card .offer-actions #whatsapp-offer {
+  background: #17814a;
+  border: 1px solid #49b478;
+  color: #fff;
+  border-radius: 11px;
+  box-shadow: 0 4px 0 #0a5830;
+  font-size: 13px;
+  font-weight: 800;
+  min-height: 59px;
+  padding: 14px 16px;
+  letter-spacing: 0.2px;
+  gap: 10px;
+}
+.quick-purchase-inner #whatsapp-hero:hover,
+.offer-card .offer-actions #whatsapp-offer:hover {
+  background: #1c9759;
+  color: #fff;
+  box-shadow: 0 5px 0 #0a5830;
+}
+.quick-purchase-inner #whatsapp-hero svg,
+.offer-card .offer-actions #whatsapp-offer svg { width: 21px; height: 21px; }
+.benefits { padding: 53px 0 56px; }
+.benefits h2 {
+  max-width: 910px;
+  font-size: clamp(27px, 3.3vw, 43px);
+  text-wrap: balance;
+}
+.offer-section { padding-top: 38px; }
+@media (max-width: 700px) {
+  .hero-stage .hero { padding-top: 25px; padding-bottom: 10px; }
+  .hero-stage .hero h1 {
+    font-size: clamp(27px, 7.1vw, 36px);
+    line-height: 1.14;
+    margin: 2px auto 20px;
+  }
+  .hero-stage .vsl.vsl-video { margin-bottom: 3px; }
+  .real-testimonials { padding: 12px 0 7px; }
+  .reviews-compact { width: min(100% - 18px, 590px); }
+  .facebook-reviews-desktop { display: none; }
+  .facebook-reviews-mobile {
+    display: block;
+    overflow: hidden;
+    border: 1px solid #d9d3c7;
+    border-radius: 9px;
+    background: #fff;
+    box-shadow: 0 9px 21px #0b25140f;
+  }
+  .facebook-reviews figcaption { font-size: 10px; padding: 0 6px; }
+  .instant-purchase { padding: 16px 0 30px; }
+  .quick-offer { font-size: 15px; }
+  .quick-purchase-inner #hero-checkout { min-height: 62px; font-size: 15px; }
+  .quick-purchase-inner #whatsapp-hero { min-height: 56px; font-size: 13px; }
+  .quick-trust { font-size: 10px; }
+  .benefits { padding: 36px 0 43px; }
+  .benefits h2 { font-size: clamp(26px, 6.3vw, 32px); }
+  .offer-section { padding-top: 30px; }
+}
