@@ -138,3 +138,64 @@
   .benefits h2 { font-size: clamp(26px, 6.3vw, 32px); }
   .offer-section { padding-top: 30px; }
 }
+
+/* Comentários enviados pela organização: cards legíveis, sem métricas fabricadas. */
+.reviews-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, minmax(168px, auto));
+  grid-auto-columns: minmax(290px, 33%);
+  gap: 13px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  padding: 8px 3px 14px;
+}
+.review-card {
+  scroll-snap-align: start;
+  min-width: 0;
+  padding: 17px 17px 16px;
+  background: #fff;
+  border: 1px solid #e0dacd;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px #17342710;
+}
+.review-person { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.review-person strong { color: #253d32; font-size: 14px; line-height: 1.35; }
+.review-avatar {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  color: #fff;
+  background: #7e2833;
+  font-size: 12px;
+  font-weight: 800;
+}
+.review-card p {
+  color: #26362e;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+.review-note {
+  color: #6a736e;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+  margin: 2px auto 0;
+}
+@media (max-width: 700px) {
+  .reviews-strip {
+    grid-template-rows: 1fr;
+    grid-auto-columns: 83%;
+    gap: 12px;
+    padding: 7px 2px 15px;
+  }
+  .review-card { min-height: 201px; padding: 15px; }
+  .review-card p { font-size: 13px; line-height: 1.55; }
+  .review-person strong { font-size: 13px; }
+  .review-note { font-size: 10px; }
+}
