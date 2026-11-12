@@ -43,7 +43,7 @@ Os players usam iframe HTTPS, `loading=lazy`, `autoplay=false`, `preload=false`;
 
 ## Meta Pixel
 
-Não existe evento Purchase disparado pela landing page no clique. Configure rastreamento da confirmação de compra na Cakto e evite duplicação entre Pixel e API de Conversões.
+Meta Pixel de ID `2202753393610846` instalado em `index.html` (script no head e fallback noscript no body). O evento `PageView` é registrado na visita. Nenhum `Purchase` é disparado na landing page. Registrar `Purchase` somente após confirmação de pagamento no checkout da Cakto. Evitar duplicações entre Pixel e API de Conversões. Validar recebimento no Gerenciador de Eventos da Meta.
 
 ## Vercel
 
