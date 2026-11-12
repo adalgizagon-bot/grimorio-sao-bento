@@ -1,6 +1,7 @@
 import './style.css';
 import './promo.css';
 import './refinement.css';
+import './conversion.css';
 import { checkoutUrl, whatsappUrl, httpsUrl } from './config.js';
 const e = import.meta.env;
 const supportNumber = e.VITE_WHATSAPP_NUMBER || '5511942353966';
