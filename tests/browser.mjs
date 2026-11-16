@@ -18,10 +18,10 @@ assert.equal(purchaseWhatsApp.searchParams.get('text'), 'Quero comprar o Grimór
 assert.equal(await page.locator('#hero-checkout').getAttribute('href'), purchaseWhatsApp.href);
 assert.equal(await page.locator('#checkout').getAttribute('target'), '_blank');
 assert.equal(await page.locator('#hero-checkout').getAttribute('target'), '_blank');
-assert.equal((await page.locator('#checkout').innerText()).trim(),'QUERO COMPRAR PELO WHATSAPP →');
+assert.equal((await page.locator('#checkout').innerText()).trim(),'QUERO MUDAR MINHA VIDA →');
 assert.ok((await page.locator('h1').innerText()).includes('oração de São Bento'));
 assert.equal(await page.locator('h1 .change-word').innerText(),'MUDAR');
-assert.equal((await page.locator('#hero-checkout').innerText()).trim(),'QUERO COMPRAR PELO WHATSAPP →');
+assert.equal((await page.locator('#hero-checkout').innerText()).trim(),'QUERO MUDAR MINHA VIDA →');
 const whatsapp = new URL(await page.locator('#whatsapp').getAttribute('href'));
 assert.equal(whatsapp.hostname,'wa.me'); assert.equal(whatsapp.pathname,'/5511942353966');
 assert.equal(whatsapp.searchParams.get('text'),'Olá! Gostaria de saber mais sobre o Grimório de São Bento.');
