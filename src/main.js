@@ -3,7 +3,7 @@ import './promo.css';
 import './refinement.css';
 import './conversion.css';
 import './offer-refresh.css';
-import { checkoutUrl, whatsappUrl, httpsUrl } from './config.js';
+import { whatsappUrl, httpsUrl } from './config.js';
 const e = import.meta.env;
 const supportNumber = e.VITE_WHATSAPP_NUMBER || '5511942353966';
 const heart = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>';
@@ -46,8 +46,8 @@ document.querySelector('#app').innerHTML = `
 <section class="instant-purchase" id="comprar-agora">
   <div class="wrap quick-purchase-inner">
     <p class="quick-offer">Seu Grimório digital por <strong>R$ 19,90</strong></p>
-    <a class="button hero-buy quick-buy" id="hero-checkout" href="#oferta">QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span></a>
-    <p class="quick-trust">Compra segura • Pagamento protegido • Produto 100% digital</p>
+    <a class="button hero-buy quick-buy" id="hero-checkout" href="#oferta">QUERO COMPRAR PELO WHATSAPP <span aria-hidden="true">→</span></a>
+    <p class="quick-trust">Atendimento pelo WhatsApp • Pagamento pela Cakto • Produto 100% digital</p>
     <button class="button whatsapp-hero quick-whatsapp" id="whatsapp-hero" disabled>${whatsappIcon} FALAR NO WHATSAPP</button>
   </div>
 </section>
@@ -79,7 +79,7 @@ document.querySelector('#app').innerHTML = `
         <button class="button" id="checkout" disabled>COMPRA DISPONÍVEL EM BREVE</button>
         <button class="button whatsapp-offer" id="whatsapp-offer" disabled>${whatsappIcon} TENHO DÚVIDAS · FALAR NO WHATSAPP</button>
       </div>
-      <p class="trust-line" id="trust-line" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg><span>Compra segura • Pagamento protegido • Produto 100% digital</span></p>
+      <p class="trust-line" id="trust-line" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg><span>Atendimento pelo WhatsApp • Pagamento pela Cakto • Produto 100% digital</span></p>
     </article>
   </div>
 </section>
@@ -87,16 +87,26 @@ document.querySelector('#app').innerHTML = `
 <section class="faq wrap"><p class="eyebrow">TUDO COM CLAREZA</p><h2>Dúvidas frequentes</h2><div class="questions">${faqs.map(([q,a])=>`<details><summary>${q}<span aria-hidden="true">+</span></summary><p>${a}</p></details>`).join('')}</div></section></main>
 <footer><div class="wrap footer-grid"><div><p class="footer-brand">Grimório de São Bento</p><p>Orações e espiritualidade • Edição digital</p></div><div class="footer-links"><span id="privacy" hidden></span><span id="terms" hidden></span><a href="#suporte">Canal de suporte</a></div></div><div class="wrap footer-note">eBook 100% digital. Atendimento pelo WhatsApp informado nesta página.</div></footer>`;
 function activateButton(id, url) { const old = document.getElementById(id); const link = document.createElement('a'); link.id = id; link.className = old.className; link.innerHTML = old.innerHTML; link.href = url; link.rel = 'noopener noreferrer'; old.replaceWith(link); }
-const checkout = checkoutUrl(e.VITE_CHECKOUT_URL || 'https://pay.cakto.com.br/876y8h4_1309579');
-if(checkout) {
-  document.getElementById('hero-checkout').href=checkout;
-  const button=document.getElementById('checkout');
-  button.innerHTML='QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span>';
-  activateButton('checkout',checkout);
-  document.getElementById('trust-line').hidden=false;
-}
 const whatsapp = whatsappUrl(supportNumber);
-if(whatsapp) { for(const id of ['whatsapp','whatsapp-hero','whatsapp-offer']) activateButton(id,whatsapp); document.getElementById('whatsapp-status').textContent = 'Atendimento pelo WhatsApp oficial.'; }
+if (whatsapp) {
+  // Atendimento e intenção de compra têm mensagens diferentes, mas chegam ao mesmo número.
+  for (const id of ['whatsapp','whatsapp-hero','whatsapp-offer']) activateButton(id, whatsapp);
+  document.getElementById('whatsapp-status').textContent = 'Atendimento pelo WhatsApp oficial.';
+
+  const purchaseWhatsApp = new URL(whatsapp);
+  purchaseWhatsApp.searchParams.set('text', 'Quero comprar o Grimório Sagrado de São Bento e mudar minha vida');
+  const purchaseLink = purchaseWhatsApp.href;
+  const heroBuy = document.getElementById('hero-checkout');
+  heroBuy.href = purchaseLink;
+  heroBuy.target = '_blank';
+  heroBuy.rel = 'noopener noreferrer';
+
+  const buyButton = document.getElementById('checkout');
+  buyButton.innerHTML = 'QUERO COMPRAR PELO WHATSAPP <span aria-hidden="true">→</span>';
+  activateButton('checkout', purchaseLink);
+  document.getElementById('checkout').target = '_blank';
+  document.getElementById('trust-line').hidden = false;
+}
 for(const [id,value] of [['privacy',e.VITE_PRIVACY_URL],['terms',e.VITE_TERMS_URL]]) { const url=httpsUrl(value); if(url) {const old=document.getElementById(id); const a=document.createElement('a'); a.textContent=id==='privacy'?'Política de Privacidade':'Termos de Compra'; a.href=url; old.replaceWith(a);} }
 // Os dois vídeos possuem posições definidas: novo vídeo no topo e vídeo anterior junto à oferta.
 const bunnyQuery='?autoplay=false&preload=false&playsinline=true&compactControls=true&showSpeed=false&levelCap=true';
