@@ -46,7 +46,7 @@ document.querySelector('#app').innerHTML = `
 <section class="instant-purchase" id="comprar-agora">
   <div class="wrap quick-purchase-inner">
     <p class="quick-offer">Seu Grimório digital por <strong>R$ 19,90</strong></p>
-    <a class="button hero-buy quick-buy" id="hero-checkout" href="#oferta">QUERO COMPRAR PELO WHATSAPP <span aria-hidden="true">→</span></a>
+    <a class="button hero-buy quick-buy" id="hero-checkout" href="#oferta">QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span></a>
     <p class="quick-trust">Atendimento pelo WhatsApp • Pagamento pela Cakto • Produto 100% digital</p>
     <button class="button whatsapp-hero quick-whatsapp" id="whatsapp-hero" disabled>${whatsappIcon} FALAR NO WHATSAPP</button>
   </div>
@@ -102,7 +102,7 @@ if (whatsapp) {
   heroBuy.rel = 'noopener noreferrer';
 
   const buyButton = document.getElementById('checkout');
-  buyButton.innerHTML = 'QUERO COMPRAR PELO WHATSAPP <span aria-hidden="true">→</span>';
+  buyButton.innerHTML = 'QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span>';
   activateButton('checkout', purchaseLink);
   document.getElementById('checkout').target = '_blank';
   document.getElementById('trust-line').hidden = false;
