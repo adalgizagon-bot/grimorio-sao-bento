@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#133625">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="Pagamento Pix do eBook Grimório de São Bento.">
+<title>Checkout Pix | Grimório de São Bento</title>
+</head>
+<body>
+<main class="checkout-shell">
+  <header class="brand"><span class="brand-icon">✝</span><span>GRIMÓRIO DE SÃO BENTO</span></header>
+  <section class="checkout-card">
+    <div class="top-cover">
+      <div class="tag">EBOOK DIGITAL</div>
+      <h1>Seu Grimório está a um passo de você.</h1>
+      <p>Preencha seus dados, gere o Pix e pague diretamente pelo aplicativo do seu banco.</p>
+      <div class="price">R$ 19,90 <small>à vista no Pix</small></div>
+    </div>
+    <div class="checkout-body" id="formPanel">
+      <h2>Finalize sua compra</h2>
+      <p class="lead">Usaremos seus dados apenas para processar o pedido e orientar a entrega do acesso.</p>
+      <form id="pixForm" autocomplete="on" novalidate>
+        <label for="customerName">Nome completo</label>
+        <input id="customerName" name="name" autocomplete="name" placeholder="Seu nome completo" minlength="5" maxlength="120" required>
+        <label for="customerCpf">CPF</label>
+        <input id="customerCpf" name="cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" autocomplete="off" required>
+        <label for="customerPhone">WhatsApp com DDD</label>
+        <input id="customerPhone" name="phone" placeholder="(11) 99999-9999" inputmode="tel" autocomplete="tel" maxlength="20" required>
+        <label for="customerEmail">E-mail para entrega do acesso</label>
+        <input id="customerEmail" name="email" placeholder="voce@exemplo.com" type="email" autocomplete="email" maxlength="180" required>
+        <div class="turnstile-wrap">
+          <div id="turnstile"></div>
+        </div>
+        <button id="generatePix" type="submit" disabled>GERAR MEU PIX DE R$ 19,90</button>
+        <p id="formFeedback" class="feedback" aria-live="polite">Verificando disponibilidade do checkout...</p>
+      </form>
+      <p class="secure-note">🔒 Pagamento processado pela Cakto • Produto 100% digital</p>
+      <p class="privacy-note">Seus dados não são publicados. Ao continuar, você concorda em utilizá-los para emissão da cobrança e entrega do eBook.</p>
+    </div>
+    <section id="pixPanel" class="checkout-body pix-panel" hidden aria-live="polite">
+      <div class="pix-header"><span class="success-icon">✓</span><h2>Pix gerado com sucesso!</h2></div>
+      <p class="lead">Abra seu aplicativo bancário, escolha Pix e use o QR Code ou o código abaixo.</p>
+      <div id="qrCode" class="qr-code" aria-label="Código QR para pagamento"></div>
+      <div class="pix-price">Valor: <strong>R$ 19,90</strong></div>
+      <label for="pixCode">Código Pix copia e cola</label>
+      <textarea id="pixCode" readonly rows="3" spellcheck="false"></textarea>
+      <button id="copyPix" type="button">COPIAR CÓDIGO PIX</button>
+      <p id="expires" class="expire"></p>
+      <div class="pending" id="paymentStatus"><span class="pulse"></span> Aguardando confirmação do pagamento...</div>
+      <p id="pixFeedback" class="feedback"></p>
+      <a href="#" id="newPix" class="text-link">Preciso gerar um novo Pix</a>
+      <p class="support">Precisa de ajuda? <a href="https://wa.me/5511942353966?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20o%20Pix%20do%20Grim%C3%B3rio%20de%20S%C3%A3o%20Bento." target="_blank" rel="noopener noreferrer">Fale com o suporte no WhatsApp.</a></p>
+    </section>
+  </section>
+  <footer>
+    <p>Compra segura • Produto digital • Suporte pelo WhatsApp</p>
+    <a href="https://pay.cakto.com.br/876y8h4_1309579" target="_blank" rel="noopener noreferrer">Prefere pagar pelo checkout tradicional? Clique aqui.</a>
+  </footer>
+</main>
+<script src="/vendor/qrcode.min.js" defer></script>
+<script type="module" src="/src/pix.js"></script>
+</body>
+</html>
