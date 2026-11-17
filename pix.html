@@ -11,13 +11,18 @@
 </head>
 <body>
 <main class="checkout-shell">
-  <header class="brand"><span class="brand-icon">✝</span><span>GRIMÓRIO DE SÃO BENTO</span></header>
   <section class="checkout-card">
     <div class="top-cover">
-      <div class="tag">EBOOK DIGITAL</div>
+      <div class="tag">ORAÇÕES PODEROSAS</div>
       <h1>Seu Grimório está a um passo de você.</h1>
       <p>Preencha seus dados, gere o Pix e pague diretamente pelo aplicativo do seu banco.</p>
-      <div class="price"><span id="initialPrice">Valor calculado pela Cakto</span><small>Confira o total antes de pagar</small></div>
+      <div class="promotion">
+        <p class="previous-price">De <s>R$ 197,00</s></p>
+        <p class="for-only">por apenas</p>
+        <div class="price"><span id="initialPrice">R$ 19,90</span></div>
+        <p class="limited-time">POR TEMPO LIMITADO</p>
+        <p class="final-price-disclaimer">O valor final é confirmado na geração do Pix pela Cakto.</p>
+      </div>
     </div>
     <div class="checkout-body" id="formPanel">
       <h2>Finalize sua compra</h2>
@@ -53,12 +58,14 @@
       <div class="pending" id="paymentStatus"><span class="pulse"></span> Aguardando confirmação do pagamento...</div>
       <p id="pixFeedback" class="feedback"></p>
       <a href="#" id="newPix" class="text-link">Preciso gerar um novo Pix</a>
-      <p class="support">Precisa de ajuda? <a href="https://wa.me/5511942353966?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20o%20Pix%20do%20Grim%C3%B3rio%20de%20S%C3%A3o%20Bento." target="_blank" rel="noopener noreferrer">Fale com o suporte no WhatsApp.</a></p>
     </section>
   </section>
-  <footer>
-    <p>Compra segura • Produto digital • Suporte pelo WhatsApp</p>
-    <a href="https://wa.me/5511942353966?text=Ol%C3%A1%21%20Preciso%20de%20ajuda%20para%20comprar%20o%20Grim%C3%B3rio%20pelo%20Pix." target="_blank" rel="noopener noreferrer">Precisa de ajuda com o Pix? Atendimento pelo WhatsApp.</a>
+  <footer class="help-section">
+    <h2>Precisa de ajuda com o Pix?</h2>
+    <a class="whatsapp-support-button" href="https://wa.me/5511942353966?text=Ol%C3%A1%21%20Preciso%20de%20ajuda%20para%20comprar%20o%20Grim%C3%B3rio%20pelo%20Pix." target="_blank" rel="noopener noreferrer" aria-label="Atendimento pelo WhatsApp">
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="currentColor"><path d="M20.52 3.48A11.92 11.92 0 0 0 12.06 0C5.46 0 .1 5.37.1 11.98c0 2.11.56 4.18 1.61 6.01L0 24l6.16-1.61A11.84 11.84 0 0 0 12.06 24C18.66 24 24 18.63 24 12.02c0-3.21-1.24-6.22-3.48-8.54ZM12.06 21.97c-1.79 0-3.56-.48-5.09-1.39l-.36-.21-3.65.96.98-3.56-.24-.38a9.94 9.94 0 0 1-1.52-5.41c0-5.5 4.46-9.98 9.94-9.98a9.85 9.85 0 0 1 7.02 2.91 9.94 9.94 0 0 1 2.9 7.09c0 5.5-4.47 9.97-9.98 9.97Zm5.47-7.48c-.3-.15-1.77-.88-2.05-.98-.28-.1-.48-.15-.69.15-.2.3-.79.98-.97 1.18-.18.2-.36.22-.66.07-.3-.15-1.27-.47-2.41-1.49-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.13.3-.36.45-.53.15-.17.2-.3.3-.51.1-.2.05-.38-.03-.53-.07-.15-.68-1.65-.94-2.26-.24-.58-.49-.5-.68-.51h-.57c-.2 0-.53.07-.8.38-.27.3-1.04 1.02-1.04 2.48 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.48.71.31 1.26.5 1.69.64.71.23 1.35.2 1.86.12.56-.08 1.77-.73 2.02-1.43.25-.71.25-1.32.18-1.44-.07-.12-.28-.2-.58-.35Z"/></svg>
+      <span>Atendimento pelo WhatsApp</span>
+    </a>
   </footer>
 </main>
 <script src="/vendor/qrcode.min.js" defer></script>
