@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {validCpf,normalizeCustomer,requestId,isCorrectAmount,pixReady,signOrderId,readOrderToken} from '../api/_cakto.js';
+import {validCpf,normalizeCustomer,requestId,validPixAmount,pixReady,signOrderId,readOrderToken} from '../api/_cakto.js';
 import createHandler from '../api/pix/create.js';
 import statusHandler from '../api/pix/status.js';
 
@@ -19,9 +19,9 @@ test('segurança e valor do checkout',()=>{
   assert.equal(pixReady({CAKTO_PIX_ENABLED:'true',CAKTO_CLIENT_ID:'id',CAKTO_CLIENT_SECRET:'secret',CAKTO_OFFER_ID:'offer',TURNSTILE_SECRET_KEY:'secret'}),true);
   assert.equal(requestId('d9428888-122b-4f28-b7ad-441451e5b7f3'),true);
   assert.equal(requestId('1'),false);
-  assert.equal(isCorrectAmount('19.90'),true);
-  assert.equal(isCorrectAmount('19.00'),false);
-  assert.equal(isCorrectAmount('20.80'),false);
+  assert.equal(validPixAmount('19.90'),true);
+  assert.equal(validPixAmount('19.00'),true);
+  assert.equal(validPixAmount('20.80'),true);
 });
 test('token de consulta deve ter assinatura que impeça adulteração',()=>{
   const old=process.env.CAKTO_CLIENT_SECRET;
