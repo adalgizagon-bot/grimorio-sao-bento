@@ -100,8 +100,11 @@ export function readOrderToken(value) {
     return data.id;
   } catch {return null;}
 }
-export function supportedPrice(value) {
-  return Number.isFinite(Number(value)) && [19,19.9].some(p=>Math.abs(Number(value)-p)<0.001);
+export function validPixAmount(value) {
+  if (typeof value !== 'number' && typeof value !== 'string') return false;
+  if (typeof value === 'string' && !/^\d+(?:\.\d{1,2})?$/.test(value)) return false;
+  const amount = Number(value);
+  return Number.isFinite(amount) && amount > 0 && Math.abs(amount * 100 - Math.round(amount * 100)) < 0.00001;
 }
 export async function getActiveOffer(){
   if(!pixReady()) throw new Error('PIX_INACTIVE');
@@ -120,11 +123,10 @@ export async function getActiveOffer(){
     if(!response.ok)throw new Error('OFFERS_UNAVAILABLE');
     const result=await response.json();
     const offers=(Array.isArray(result.results)?result.results:[])
-       .filter(o=>o.product===PRODUCT_ID&&o.status==='active'&&o.type==='unique'&&supportedPrice(o.price));
-    found=offers.find(o=>o.id===id) || offers.find(o=>Math.abs(Number(o.price)-19.90)<0.001) ||
-      offers.find(o=>o.default===true) || offers[0] || null;
+       .filter(o=>o.product===PRODUCT_ID&&o.status==='active'&&o.type==='unique'&&validPixAmount(o.price));
+    found=offers.find(o=>o.id===id) || offers.find(o=>o.default===true) || offers[0] || null;
   }
-  if(!found||!supportedPrice(found.price)||found.product!==PRODUCT_ID)throw new Error('NO_VALID_OFFER');
+  if(!found||!validPixAmount(found.price)||found.product!==PRODUCT_ID)throw new Error('NO_VALID_OFFER');
   return {id:found.id,price:Number(found.price).toFixed(2)};
 }
 
