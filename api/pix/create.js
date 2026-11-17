@@ -1,4 +1,4 @@
-import {pixReady,normalizeCustomer,requestId,sameOrigin,caktoFetch,verifyTurnstile,signOrderId,isCorrectAmount} from '../_cakto.js';
+import {pixReady,normalizeCustomer,requestId,sameOrigin,caktoFetch,verifyTurnstile,signOrderId,getActiveOffer,supportedPrice} from '../_cakto.js';
 
 export default async function handler(req,res) {
   res.setHeader('Cache-Control','no-store, max-age=0');
@@ -13,11 +13,13 @@ export default async function handler(req,res) {
     const customer=normalizeCustomer(body);
     if(!requestId(body.requestId))return res.status(400).json({error:'Atualize a página e tente novamente.'});
     if(!(await verifyTurnstile(body.turnstileToken,req)))return res.status(403).json({error:'Confirme a verificação de segurança e tente novamente.'});
-    const offerId=process.env.CAKTO_OFFER_ID;
+    const offer=await getActiveOffer();
+    const offerId=offer.id;
     const payload={
       customer:{...customer,fingerprint:'fp_'+body.requestId},
       paymentMethod:'pix',
-      items:[{offerId}]
+      items:[{offerId}],
+      pixExpiresIn:900
     };
     const response=await caktoFetch('/payments/', {
       method:'POST',
@@ -30,14 +32,14 @@ export default async function handler(req,res) {
       return res.status(503).json({error:'Não foi possível gerar o Pix. Tente novamente ou use o checkout tradicional.'});
     }
     const data=await response.json();
-    if(!data.id||!data.pix?.qrCode||data.paymentMethod!=='pix'||data.offer?.id!==offerId||!isCorrectAmount(data.amount)){
+    if(!data.id||!data.pix?.qrCode||data.paymentMethod!=='pix'||data.offer?.id!==offerId||(!supportedPrice(data.amount) || Math.abs(Number(data.amount)-Number(offer.price))>0.001)){
       return res.status(409).json({error:'Valor ou oferta divergente. Não faça pagamento por este Pix; utilize o checkout tradicional.'});
     }
     return res.status(201).json({
       orderToken:signOrderId(data.id),
       pixCode:data.pix.qrCode,
       expirationDate:data.pix.expirationDate||null,
-      amount:'19.90',
+      amount:offer.price,
       status:'waiting_payment'
     });
   }catch(err){
