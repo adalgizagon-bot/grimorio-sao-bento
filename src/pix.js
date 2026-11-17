@@ -7,7 +7,14 @@ async function loadPriceFromCakto(){
     const response=await fetch('/api/pix/config',{cache:'no-store'});
     const data=await response.json();
     if(data.available && Number(data.amount)>0){
-      document.querySelector('#initialPrice').textContent=formatBRL(data.amount);
+      // Mantém o preço de campanha na faixa; a cobrança efetiva aparece no Pix gerado.
+      const amount=Number(data.amount);
+      const disclaimer=document.querySelector('.final-price-disclaimer');
+      if(disclaimer){
+        disclaimer.textContent=amount>19.9
+          ? 'Total calculado pela Cakto: '+formatBRL(amount)+'. Confira antes de pagar.'
+          : 'O valor final é confirmado na geração do Pix pela Cakto.';
+      }
     }
   }catch { /* A cobrança ainda pode ser gerada; o valor final será mostrado antes do pagamento. */ }
 }
@@ -97,11 +104,22 @@ function loadTurnstile(){
   tag.async=true;
   tag.onload=()=>{
     if(!window.turnstile){inform('A verificação de segurança não carregou.',true);return;}
+    let retryCount=0;
     widgetId=window.turnstile.render('#turnstile',{
-      sitekey:SITE_KEY,theme:'light',language:'pt-BR',
-      callback:(token)=>{turnstileToken=token;submit.disabled=false;inform('Pronto! Você pode gerar seu Pix.');},
-      'expired-callback':()=>{turnstileToken='';submit.disabled=true;inform('Confirme novamente a verificação de segurança.');},
-      'error-callback':()=>{turnstileToken='';submit.disabled=true;inform('Falha na verificação. Atualize a página ou fale com nosso suporte.',true);}
+      sitekey:SITE_KEY,theme:'light',language:'pt-BR',appearance:'interaction-only',
+      'refresh-expired':'auto',
+      callback:(token)=>{retryCount=0;turnstileToken=token;submit.disabled=false;inform('Pronto! Você pode gerar seu Pix.');},
+      'expired-callback':()=>{turnstileToken='';submit.disabled=true;inform('Atualizando a verificação de segurança...');},
+      'error-callback':()=>{
+        turnstileToken='';submit.disabled=true;
+        if(retryCount<1){
+          retryCount++;
+          inform('Reconectando à verificação de segurança...');
+          setTimeout(()=>{try{window.turnstile.reset(widgetId);}catch{inform('Não foi possível validar agora. Fale com nosso suporte.',true);}},800);
+        }else {
+          inform('Não foi possível validar agora. Atualize a página ou fale com nosso suporte.',true);
+        }
+      }
     });
   };
   tag.onerror=()=>inform('Não foi possível carregar a verificação. Fale com o suporte pelo WhatsApp.',true);
