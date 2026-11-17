@@ -4,7 +4,7 @@ export default async function handler(req,res) {
   res.setHeader('Cache-Control','no-store, max-age=0');
   res.setHeader('X-Content-Type-Options','nosniff');
   if(req.method!=='POST') { res.setHeader('Allow','POST');return res.status(405).json({error:'Método não permitido.'}); }
-  if(!pixReady())return res.status(503).json({error:'Pix simplificado ainda em configuração. Use o checkout tradicional.'});
+  if(!pixReady())return res.status(503).json({error:'Pix simplificado ainda em configuração. Fale com nosso suporte pelo WhatsApp.'});
   if(!sameOrigin(req))return res.status(403).json({error:'Origem não autorizada.'});
   if(!String(req.headers['content-type']||'').startsWith('application/json'))return res.status(415).json({error:'Formato inválido.'});
   try {
@@ -29,11 +29,11 @@ export default async function handler(req,res) {
     if(!response.ok){
       if(response.status===409) return res.status(409).json({error:'Essa tentativa já está sendo processada. Aguarde alguns segundos ou recarregue a página.'});
       if(response.status===401||response.status===403) return res.status(503).json({error:'O pagamento Pix está temporariamente indisponível.'});
-      return res.status(503).json({error:'Não foi possível gerar o Pix. Tente novamente ou use o checkout tradicional.'});
+      return res.status(503).json({error:'Não foi possível gerar o Pix. Tente novamente ou Fale com nosso suporte pelo WhatsApp.'});
     }
     const data=await response.json();
     if(!data.id || !data.pix?.qrCode || data.paymentMethod!=='pix' || !validPixAmount(data.amount)){
-      return res.status(409).json({error:'A Cakto retornou uma cobrança incompleta. Utilize o checkout tradicional.'});
+      return res.status(409).json({error:'A Cakto retornou uma cobrança incompleta. fale com nosso suporte pelo WhatsApp.'});
     }
     return res.status(201).json({
       orderToken:signOrderId(data.id),
@@ -46,6 +46,6 @@ export default async function handler(req,res) {
     if(err instanceof SyntaxError)return res.status(400).json({error:'Dados inválidos.'});
     if(err.message && (/Informe|Confira/.test(err.message)))return res.status(400).json({error:err.message});
     // Não registrar nome, e-mail, CPF, telefone ou detalhes das credenciais.
-    return res.status(503).json({error:'Não foi possível gerar o Pix. Use o checkout tradicional ou tente novamente.'});
+    return res.status(503).json({error:'Não foi possível gerar o Pix. Fale com nosso suporte pelo WhatsApp ou tente novamente.'});
   }
 }
