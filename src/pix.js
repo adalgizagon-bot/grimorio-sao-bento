@@ -1,6 +1,16 @@
 import './pix.css';
 
 const SITE_KEY=import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
+const formatBRL=value=>Number(value).toLocaleString('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:2,maximumFractionDigits:2});
+async function loadPriceFromCakto(){
+  try {
+    const response=await fetch('/api/pix/config',{cache:'no-store'});
+    const data=await response.json();
+    if(data.available && Number(data.amount)>0){
+      document.querySelector('#initialPrice').textContent=formatBRL(data.amount);
+    }
+  }catch { /* A cobrança ainda pode ser gerada; o valor final será mostrado antes do pagamento. */ }
+}
 const form=document.querySelector('#pixForm');
 const submit=document.querySelector('#generatePix');
 const feedback=document.querySelector('#formFeedback');
@@ -111,14 +121,16 @@ form.addEventListener('submit',async ev=>{
   };
   processing=true;
   submit.disabled=true;
-  inform('Gerando seu Pix de R$ 19,90...');
+  inform('Gerando seu Pix pela Cakto...');
   try{
     const response=await fetch('/api/pix/create',{
       method:'POST',headers:{'Content-Type':'application/json'},
       cache:'no-store',body:JSON.stringify(body)
     });
     const data=await response.json();
-    if(!response.ok || !data.pixCode || !data.orderToken)throw new Error(data.error||'Não foi possível gerar o Pix.');
+    if(!response.ok || !data.pixCode || !data.orderToken || !Number.isFinite(Number(data.amount)) || Number(data.amount)<=0)
+      throw new Error(data.error||'Não foi possível gerar o Pix.');
+    document.querySelector('#finalPixAmount').textContent=formatBRL(data.amount);
     orderToken=data.orderToken;
     expiresAt=formatDate(data.expirationDate);
     document.querySelector('#pixCode').value=data.pixCode;
@@ -160,4 +172,5 @@ document.querySelector('#newPix').addEventListener('click',event=>{
 document.addEventListener('visibilitychange',()=>{
   if(!document.hidden && orderToken)nextStatusPoll(600);
 });
+loadPriceFromCakto();
 loadTurnstile();
