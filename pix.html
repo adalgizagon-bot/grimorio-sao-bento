@@ -17,7 +17,7 @@
       <div class="tag">EBOOK DIGITAL</div>
       <h1>Seu Grimório está a um passo de você.</h1>
       <p>Preencha seus dados, gere o Pix e pague diretamente pelo aplicativo do seu banco.</p>
-      <div class="price">R$ 19,90 <small>à vista no Pix</small></div>
+      <div class="price"><span id="initialPrice">Valor calculado pela Cakto</span><small>Confira o total antes de pagar</small></div>
     </div>
     <div class="checkout-body" id="formPanel">
       <h2>Finalize sua compra</h2>
@@ -34,7 +34,7 @@
         <div class="turnstile-wrap">
           <div id="turnstile"></div>
         </div>
-        <button id="generatePix" type="submit" disabled>GERAR MEU PIX DE R$ 19,90</button>
+        <button id="generatePix" type="submit" disabled>GERAR MEU PIX</button>
         <p id="formFeedback" class="feedback" aria-live="polite">Verificando disponibilidade do checkout...</p>
       </form>
       <p class="secure-note">🔒 Pagamento processado pela Cakto • Produto 100% digital</p>
@@ -44,7 +44,8 @@
       <div class="pix-header"><span class="success-icon">✓</span><h2>Pix gerado com sucesso!</h2></div>
       <p class="lead">Abra seu aplicativo bancário, escolha Pix e use o QR Code ou o código abaixo.</p>
       <div id="qrCode" class="qr-code" aria-label="Código QR para pagamento"></div>
-      <div class="pix-price">Valor: <strong>R$ 19,90</strong></div>
+      <div class="pix-price">Valor final da cobrança: <strong id="finalPixAmount">A confirmar</strong></div>
+      <p class="expire">Confira o valor no aplicativo do seu banco antes de pagar.</p>
       <label for="pixCode">Código Pix copia e cola</label>
       <textarea id="pixCode" readonly rows="3" spellcheck="false"></textarea>
       <button id="copyPix" type="button">COPIAR CÓDIGO PIX</button>
