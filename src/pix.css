@@ -79,3 +79,45 @@ footer a{color:#256743;text-underline-offset:3px}
   .help-section { margin: 12px 9px 8px; padding: 18px 13px 22px; }
   .whatsapp-support-button { min-height:62px; }
 }
+
+/* Ajustes finais de conversão e acessibilidade no checkout Pix integrado. */
+.top-cover .tag {
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 900;
+  letter-spacing: .09em;
+  border-width: 2px;
+  padding: 10px 16px;
+  color: #ffe28d;
+}
+.top-cover .previous-price {
+  font-size: clamp(25px, 6.5vw, 31px);
+  line-height: 1.25;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  color: #fff2db;
+}
+.top-cover .previous-price s {
+  text-decoration-color: #ff676a;
+  text-decoration-thickness: 3px;
+  color: #fff1de;
+}
+.top-cover .for-only { font-size: 19px; }
+.top-cover .limited-time {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 9px;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(12px, 2.6vw, 14px);
+  letter-spacing: .035em;
+  padding: 12px 15px;
+}
+.limited-time-clock { flex: 0 0 auto; width: 22px; height: 22px; }
+.turnstile-wrap { min-height: 0; margin: 8px 0 10px; }
+@media (max-width: 450px) {
+  .top-cover .tag { font-size: 13px; padding: 10px 13px; }
+  .top-cover .previous-price { font-size: 26px; }
+  .top-cover .limited-time { padding: 10px 12px; }
+  .limited-time-clock { width: 20px; height: 20px; }
+}
