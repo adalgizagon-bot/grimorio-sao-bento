@@ -1,0 +1,19 @@
+/* Checkout Pix incorporado à página de vendas; formulário carregado no mesmo domínio. */
+.pix-integration {
+  scroll-margin-top: 24px;
+  padding: 44px 16px 50px;
+  background: linear-gradient(160deg,#eef2e9,#f6f2e8);
+  border-block: 1px solid #d7d9ca;
+}
+.pix-integration-wrap { text-align:center; max-width:800px; }
+.pix-integration .eyebrow { color:#886525; font-weight:800; }
+.pix-integration h2 { color:#183a2d; font-family:Georgia,'Times New Roman',serif; font-size:clamp(27px,4vw,42px); line-height:1.18; margin:10px auto; }
+.pix-integration-info { color:#56665a; font-size:14px; line-height:1.6; max-width:520px; margin:8px auto 22px; }
+#pix-embedded-frame { display:block; width:100%; max-width:630px; height:1100px; border:0; margin:0 auto; overflow:hidden; background:transparent; }
+@media(max-width:650px) {
+ .pix-integration { padding:32px 4px 36px; }
+ .pix-integration-wrap { width:100%; }
+ .pix-integration h2 { font-size:29px; padding-inline:14px; }
+ .pix-integration-info { font-size:13px; padding-inline:14px; }
+ #pix-embedded-frame { width:100%; }
+}
