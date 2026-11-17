@@ -18,7 +18,7 @@ const themes = [
 const faqs = [
   ['O Grimório é físico ou digital?', 'É um eBook 100% digital. Você pode ler no celular, tablet ou computador.'],
   ['Como receberei meu Grimório?', 'O acesso será disponibilizado após a confirmação do pagamento, conforme as instruções da plataforma.'],
-  ['Posso parcelar a compra?', 'A página apresenta a opção de até 4 parcelas de R$ 5,37, sujeita às condições e aos valores confirmados no checkout.'],
+  ['Como faço o pagamento?', 'Você gera o Pix diretamente nesta página. O valor final aparece antes de pagar e você pode copiar o código no seu aplicativo bancário.'],
   ['Posso falar com alguém?', whatsappUrl(supportNumber) ? 'Sim! Nosso suporte está disponível pelo WhatsApp.' : 'Nosso canal de suporte está em configuração.']
 ];
 document.querySelector('#app').innerHTML = `
@@ -48,7 +48,7 @@ document.querySelector('#app').innerHTML = `
   <div class="wrap quick-purchase-inner">
     <p class="quick-offer">Seu Grimório digital por <strong>R$ 19,90</strong></p>
     <a class="button hero-buy quick-buy" id="hero-checkout" href="#pix-finalizar">QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span></a>
-    <p class="quick-trust">Pix direto no site • Suporte pelo WhatsApp • Produto 100% digital</p>
+    <p class="quick-trust">Pix direto no site • Valor final informado antes de pagar • Suporte pelo WhatsApp</p>
     <button class="button whatsapp-hero quick-whatsapp" id="whatsapp-hero" disabled>${whatsappIcon} FALAR NO WHATSAPP</button>
   </div>
 </section>
@@ -76,9 +76,9 @@ document.querySelector('#app').innerHTML = `
       <h3>GRIMÓRIO DE SÃO BENTO</h3>
       <div class="old-price">De <s>R$ 197,00</s> por apenas</div>
       <div class="price">R$ <strong>19,90</strong></div>
-      <p class="installments">ou até <strong>4x de R$ 5,37</strong> no cartão</p>
-      <p class="payment-note">Total parcelado: R$ 21,48. Valores e condições sujeitos à confirmação no checkout.</p>
-      <p class="price-note">Pagamento único à vista ou parcelado · Acesso digital</p>
+      <p class="installments">Pagamento por Pix, sem sair do site.</p>
+      <p class="payment-note">O valor final informado pela Cakto será exibido antes do pagamento.</p>
+      <p class="price-note">Pagamento via Pix · Acesso digital</p>
       <ul>
         <li>Orações de fé para dinheiro, saúde, amor e família.</li>
         <li>Leitura no celular, tablet ou computador.</li>
@@ -115,6 +115,10 @@ activateButton('checkout',checkoutDestination);
 const pixFrame=document.getElementById('pix-embedded-frame');
 window.addEventListener('message',(event)=>{
   if(event.origin!==window.location.origin || event.source!==pixFrame.contentWindow) return;
+  if(event.data?.type==='grimorio-pix-iframe-scroll'){
+    document.querySelector('#pix-finalizar').scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
   if(event.data?.type!=='grimorio-pix-iframe-height')return;
   const height=Number(event.data.height);
   if(Number.isFinite(height)&&height>=420&&height<=2500)pixFrame.style.height=Math.ceil(height)+'px';
