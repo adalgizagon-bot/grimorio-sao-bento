@@ -48,3 +48,28 @@ Meta Pixel de ID `2202753393610846` instalado em `index.html` (script no head e 
 ## Vercel
 
 Repositório `adalgizagon-bot/grimorio-sao-bento`, branch `main`; Vite, build `npm run build`, saída `dist`. O site do Projeto Renascer com Fé é independente e não foi alterado.
+
+
+## Novo checkout Pix simplificado (desativado por padrão)
+
+Rota independente de testes: `/pix.html`. O site principal e seus botões para o checkout tradicional Cakto permanecem inalterados. A função `api/pix/create.js` retorna 503 e **não cria cobranças** enquanto `CAKTO_PIX_ENABLED` não for `true`. Não há dados bancários ou credenciais no Git.
+
+### Configuração na Vercel
+
+Em **grimorio-sao-bento → Settings → Environment Variables**, adicione as variáveis no ambiente desejado:
+
+- `CAKTO_CLIENT_ID` (secret): identificador da chave Cakto API.
+- `CAKTO_CLIENT_SECRET` (secret): segredo privado da API. Não usar `VITE_`, não adicionar ao repositório.
+- `CAKTO_OFFER_ID` (servidor): ID de uma **oferta ativa** do Grimório com total de Pix **R$ 19,90**. Não confundir com o link `pay.cakto.com.br`.
+- `TURNSTILE_SECRET_KEY` (secret): chave privada do Cloudflare Turnstile.
+- `VITE_TURNSTILE_SITE_KEY` (pública): chave pública do Turnstile. Configure os domínios de produção e preview usados.
+- `CAKTO_PIX_ENABLED=false` inicialmente; somente trocar para `true` após verificação técnica, segurança, preço final, privacidade e teste de entrega.
+
+O Turnstile é validado **no servidor** antes de criar uma cobrança; sem ele ou sem qualquer credencial, o endpoint recusa pagamentos. O comprador informa nome completo, CPF válido, WhatsApp com DDD e e-mail. Dados são encaminhados diretamente à Cakto via HTTPS, sem `localStorage` de informações pessoais. O identificador da intenção é enviado como `X-Idempotency-Key` na criação. A página mostra o Pix copia e cola e o QR gerado localmente pela biblioteca MIT `public/vendor/qrcode.min.js`. O valor da resposta da Cakto é comparado a **R$ 19,90** antes de exibir o QR. O cliente pode consultar status de pagamento por `api/pix/status.js`, com token assinado pelo servidor e GET autenticado do pedido na Cakto.
+
+**O que falta antes de ativar:** confirmar `CAKTO_OFFER_ID` (oferta correta/ativa com valor final exato), configurar credenciais em ambiente protegido, registrar as condições de privacidade/entrega/reembolso e testar uma compra real de baixo valor com o responsável. A criação da cobrança pode funcionar mesmo que a entrega digital não esteja automatizada; verificar como a Cakto libera esse produto quando a venda vem da API. **Não existe envio automático pelo WhatsApp nesta implementação.** O acesso continua sujeito às regras de entrega configuradas na Cakto ou à orientação do suporte.
+
+Não registrar `Purchase` por clique ou Pix gerado. Só contabilizar a compra depois de `paid` validado. Ainda não foi criado webhook: a página consulta a API de pedidos enquanto permanece aberta. Para garantir conciliação de todos os pedidos e recuperação de cobranças, configure webhook assinado com persistência e deduplicação em etapa posterior.
+
+Comandos locais: `npm test`, `npm run build` e `node tests/browser.mjs` (para a página principal com preview rodando).
+
