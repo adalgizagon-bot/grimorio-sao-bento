@@ -53,3 +53,29 @@ footer a{color:#256743;text-underline-offset:3px}
 [hidden]{display:none!important}
 @media(max-width:450px){.checkout-shell{padding:16px 10px 32px}.brand{font-size:11px;letter-spacing:.1em;margin-bottom:13px}.checkout-card{border-radius:15px}.top-cover{padding:28px 21px 22px}.checkout-body{padding:24px 20px 28px}.price{font-size:32px}.price small{display:block;margin:3px 0 0}.qr-code{min-width:224px;min-height:224px;padding:9px}}
 @media(prefers-reduced-motion:reduce){.pulse{animation:none}}
+
+/* Checkout integrado: oferta mais visível, sem marca duplicada e com ajuda acessível no celular. */
+.checkout-shell { padding-top: 12px; padding-bottom: 22px; }
+.top-cover { padding: 26px 27px 28px; }
+.top-cover h1 { margin-top: 16px; }
+.top-cover .promotion { margin-top: 19px; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.top-cover .previous-price { font-size: 18px; line-height: 1.35; color: #fff0d7; font-weight: 700; margin: 0; }
+.top-cover .previous-price s { color: #ffc3b5; text-decoration-color: #e14646; text-decoration-thickness: 3px; }
+.top-cover .for-only { margin: 0; font-size: 16px; line-height: 1.5; color: #f6dfa0; font-weight: 800; }
+.top-cover .price { margin: 1px 0 11px; color: #ffdf75; font-size: clamp(38px, 9vw, 52px); font-weight: 800; letter-spacing: -.04em; line-height: 1.15; }
+.top-cover .limited-time { display: inline-flex; justify-content: center; align-items: center; background: linear-gradient(135deg,#ffe093,#dba93a); color: #173b2b; border-radius: 7px; padding: 9px 18px; font-size: 12px; font-weight: 900; letter-spacing: .07em; line-height: 1.25; margin: 0; box-shadow: 0 3px 0 #9a7122; }
+.top-cover .final-price-disclaimer { font-size: 10px; line-height: 1.4; color: #e2e8de; margin: 14px auto 0; max-width: 330px; }
+.help-section { max-width: 510px; padding: 19px 16px 22px; background: #f7efdd; border-radius: 16px; margin: 17px auto 0; text-align: center; }
+.help-section h2 { font-family: Georgia,'Times New Roman',serif; font-size: clamp(19px, 4vw, 24px); line-height: 1.25; margin: 0 0 15px; color: #153c2c; }
+.whatsapp-support-button { display:flex; align-items:center; justify-content:center; gap:12px; width:100%; min-height:60px; padding:12px 17px; border-radius:12px; background:linear-gradient(135deg,#15a85d,#08783b); border:1px solid #0d9349; box-shadow:0 4px 0 #075a2e; color:#fff; font-size:clamp(13px,3.2vw,17px); font-weight:800; line-height:1.25; text-align:center; text-decoration:none; }
+.whatsapp-support-button:visited { color:#fff; }
+.whatsapp-support-button:hover { background:linear-gradient(135deg,#18b969,#09864a); color:#fff; }
+.whatsapp-support-button:focus-visible { outline:3px solid #efc66e; outline-offset:4px; }
+.whatsapp-support-button svg { flex:none; width:23px; height:23px; }
+@media (max-width:450px) {
+  .checkout-shell { padding-top: 8px; padding-bottom: 12px; }
+  .top-cover { padding: 24px 18px 27px; }
+  .top-cover .price { font-size:clamp(35px, 10vw, 44px); }
+  .help-section { margin: 12px 9px 8px; padding: 18px 13px 22px; }
+  .whatsapp-support-button { min-height:62px; }
+}
