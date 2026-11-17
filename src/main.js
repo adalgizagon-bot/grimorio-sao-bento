@@ -3,6 +3,7 @@ import './promo.css';
 import './refinement.css';
 import './conversion.css';
 import './offer-refresh.css';
+import './pix-integration.css';
 import { whatsappUrl, httpsUrl } from './config.js';
 const e = import.meta.env;
 const supportNumber = e.VITE_WHATSAPP_NUMBER || '5511942353966';
@@ -46,9 +47,17 @@ document.querySelector('#app').innerHTML = `
 <section class="instant-purchase" id="comprar-agora">
   <div class="wrap quick-purchase-inner">
     <p class="quick-offer">Seu Grimório digital por <strong>R$ 19,90</strong></p>
-    <a class="button hero-buy quick-buy" id="hero-checkout" href="#oferta">QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span></a>
-    <p class="quick-trust">Atendimento pelo WhatsApp • Pagamento pela Cakto • Produto 100% digital</p>
+    <a class="button hero-buy quick-buy" id="hero-checkout" href="#pix-finalizar">QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span></a>
+    <p class="quick-trust">Pix direto no site • Suporte pelo WhatsApp • Produto 100% digital</p>
     <button class="button whatsapp-hero quick-whatsapp" id="whatsapp-hero" disabled>${whatsappIcon} FALAR NO WHATSAPP</button>
+  </div>
+</section>
+<section class="pix-integration" id="pix-finalizar" aria-labelledby="pix-intro-title">
+  <div class="wrap pix-integration-wrap">
+    <p class="eyebrow">COMPRA SEGURA · PIX DIRETO NO SITE</p>
+    <h2 id="pix-intro-title">Finalize sua compra em poucos passos</h2>
+    <p class="pix-integration-info">Preencha seus dados e gere o Pix nesta mesma página. Para dúvidas, nosso suporte atende pelo WhatsApp.</p>
+    <iframe id="pix-embedded-frame" src="/pix.html" title="Checkout Pix do Grimório Sagrado de São Bento" loading="lazy" scrolling="no" referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </div>
 </section>
 <section class="benefits wrap"><h2>DINHEIRO, SAÚDE, PAZ, AMOR E PROSPERIDADE: <em>orações para mudar sua vida.</em></h2><div class="theme-grid">${themes.map(([icon,title,desc])=>`<article class="theme"><span class="theme-icon" aria-hidden="true">${icon}</span><h3>${title}</h3><p>${desc}</p></article>`).join('')}</div></section>
@@ -79,7 +88,7 @@ document.querySelector('#app').innerHTML = `
         <button class="button" id="checkout" disabled>COMPRA DISPONÍVEL EM BREVE</button>
         <button class="button whatsapp-offer" id="whatsapp-offer" disabled>${whatsappIcon} TENHO DÚVIDAS · FALAR NO WHATSAPP</button>
       </div>
-      <p class="trust-line" id="trust-line" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg><span>Atendimento pelo WhatsApp • Pagamento pela Cakto • Produto 100% digital</span></p>
+      <p class="trust-line" id="trust-line" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg><span>Pix direto no site • Suporte pelo WhatsApp • Produto 100% digital</span></p>
     </article>
   </div>
 </section>
@@ -93,20 +102,23 @@ if (whatsapp) {
   for (const id of ['whatsapp','whatsapp-hero','whatsapp-offer']) activateButton(id, whatsapp);
   document.getElementById('whatsapp-status').textContent = 'Atendimento pelo WhatsApp oficial.';
 
-  const purchaseWhatsApp = new URL(whatsapp);
-  purchaseWhatsApp.searchParams.set('text', 'Quero comprar o Grimório Sagrado de São Bento e mudar minha vida');
-  const purchaseLink = purchaseWhatsApp.href;
-  const heroBuy = document.getElementById('hero-checkout');
-  heroBuy.href = purchaseLink;
-  heroBuy.target = '_blank';
-  heroBuy.rel = 'noopener noreferrer';
-
-  const buyButton = document.getElementById('checkout');
-  buyButton.innerHTML = 'QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span>';
-  activateButton('checkout', purchaseLink);
-  document.getElementById('checkout').target = '_blank';
   document.getElementById('trust-line').hidden = false;
 }
+const checkoutDestination='#pix-finalizar';
+const heroBuy=document.getElementById('hero-checkout');
+heroBuy.href=checkoutDestination;
+heroBuy.removeAttribute('target');
+heroBuy.removeAttribute('rel');
+const buyButton=document.getElementById('checkout');
+buyButton.innerHTML='QUERO MUDAR MINHA VIDA <span aria-hidden="true">→</span>';
+activateButton('checkout',checkoutDestination);
+const pixFrame=document.getElementById('pix-embedded-frame');
+window.addEventListener('message',(event)=>{
+  if(event.origin!==window.location.origin || event.source!==pixFrame.contentWindow) return;
+  if(event.data?.type!=='grimorio-pix-iframe-height')return;
+  const height=Number(event.data.height);
+  if(Number.isFinite(height)&&height>=420&&height<=2500)pixFrame.style.height=Math.ceil(height)+'px';
+});
 for(const [id,value] of [['privacy',e.VITE_PRIVACY_URL],['terms',e.VITE_TERMS_URL]]) { const url=httpsUrl(value); if(url) {const old=document.getElementById(id); const a=document.createElement('a'); a.textContent=id==='privacy'?'Política de Privacidade':'Termos de Compra'; a.href=url; old.replaceWith(a);} }
 // Os dois vídeos possuem posições definidas: novo vídeo no topo e vídeo anterior junto à oferta.
 const bunnyQuery='?autoplay=false&preload=false&playsinline=true&compactControls=true&showSpeed=false&levelCap=true';
