@@ -47,7 +47,7 @@ function updateCountdown(){
   const remaining=Math.ceil((expiresAt.getTime()-Date.now())/1000);
   const el=document.querySelector('#expires');
   if(remaining<=0){
-    el.textContent='Esse Pix expirou. Gere um novo código ou use o checkout tradicional.';
+    el.textContent='Esse Pix expirou. Gere um novo código ou peça ajuda pelo WhatsApp.';
     return false;
   }
   const m=Math.floor(remaining/60),s=String(remaining%60).padStart(2,'0');
@@ -89,7 +89,7 @@ function resetCaptcha(){
 }
 function loadTurnstile(){
   if(!SITE_KEY){
-    inform('Checkout Pix em preparação. Enquanto isso, use o checkout tradicional.');
+    inform('Pagamento Pix indisponível no momento. Fale com o suporte pelo WhatsApp.',true);
     return;
   }
   const tag=document.createElement('script');
@@ -101,10 +101,10 @@ function loadTurnstile(){
       sitekey:SITE_KEY,theme:'light',language:'pt-BR',
       callback:(token)=>{turnstileToken=token;submit.disabled=false;inform('Pronto! Você pode gerar seu Pix.');},
       'expired-callback':()=>{turnstileToken='';submit.disabled=true;inform('Confirme novamente a verificação de segurança.');},
-      'error-callback':()=>{turnstileToken='';submit.disabled=true;inform('Falha na verificação. Atualize a página ou use o checkout tradicional.',true);}
+      'error-callback':()=>{turnstileToken='';submit.disabled=true;inform('Falha na verificação. Atualize a página ou fale com nosso suporte.',true);}
     });
   };
-  tag.onerror=()=>inform('Não foi possível carregar a verificação. Use o checkout tradicional.',true);
+  tag.onerror=()=>inform('Não foi possível carregar a verificação. Fale com o suporte pelo WhatsApp.',true);
   document.head.append(tag);
 }
 form.addEventListener('submit',async ev=>{
@@ -137,11 +137,12 @@ form.addEventListener('submit',async ev=>{
     renderQr(data.pixCode);
     formPanel.hidden=true;
     qrPanel.hidden=false;
+    if(window.parent!==window) window.parent.postMessage({type:'grimorio-pix-iframe-scroll'},window.location.origin);
     window.scrollTo({top:0,behavior:'smooth'});
     updateCountdown();
     nextStatusPoll();
   }catch(e){
-    inform(e.message||'Erro ao gerar Pix. Use o checkout tradicional.',true);
+    inform(e.message||'Erro ao gerar Pix. Fale com o suporte pelo WhatsApp.',true);
     resetCaptcha();
   }finally{processing=false;}
 });
@@ -174,3 +175,16 @@ document.addEventListener('visibilitychange',()=>{
 });
 loadPriceFromCakto();
 loadTurnstile();
+
+/* Mantém o checkout integrado sem barra de rolagem interna no celular. */
+if(window.parent!==window && 'ResizeObserver' in window){
+  const shell=document.querySelector('.checkout-shell');
+  const reportHeight=()=>{
+    if(!shell)return;
+    const height=Math.ceil(shell.getBoundingClientRect().height+32);
+    window.parent.postMessage({type:'grimorio-pix-iframe-height',height},window.location.origin);
+  };
+  new ResizeObserver(reportHeight).observe(shell);
+  window.addEventListener('load',reportHeight);
+  reportHeight();
+}
