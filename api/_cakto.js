@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 
 export const CAKTO_BASE = 'https://api.cakto.com.br/public_api';
-export const EXPECTED_AMOUNT = '19.90';
+export const PRODUCT_ID = '462a455f-5a2b-4e77-a11c-ea5ca012e9d1';
 export const FALLBACK_CHECKOUT = 'https://pay.cakto.com.br/876y8h4_1309579';
 
 export function pixReady(env=process.env) {
@@ -100,4 +100,31 @@ export function readOrderToken(value) {
     return data.id;
   } catch {return null;}
 }
-export function isCorrectAmount(value) {return Number.isFinite(Number(value))&&Math.abs(Number(value)-19.90)<0.001;}
+export function supportedPrice(value) {
+  return Number.isFinite(Number(value)) && [19,19.9].some(p=>Math.abs(Number(value)-p)<0.001);
+}
+export async function getActiveOffer(){
+  if(!pixReady()) throw new Error('PIX_INACTIVE');
+  const id=String(process.env.CAKTO_OFFER_ID||'').trim();
+  let found=null;
+  if(/^[a-zA-Z0-9_-]{4,90}$/.test(id)){
+    const response=await caktoFetch('/offers/'+encodeURIComponent(id)+'/');
+    if(response.ok){
+      const offer=await response.json();
+      if(offer.product===PRODUCT_ID && offer.status==='active' && offer.type==='unique') found=offer;
+    }
+  }
+  if(!found){
+    const url='/offers/?product='+encodeURIComponent(PRODUCT_ID)+'&status=active&type=unique&limit=100';
+    const response=await caktoFetch(url);
+    if(!response.ok)throw new Error('OFFERS_UNAVAILABLE');
+    const result=await response.json();
+    const offers=(Array.isArray(result.results)?result.results:[])
+       .filter(o=>o.product===PRODUCT_ID&&o.status==='active'&&o.type==='unique'&&supportedPrice(o.price));
+    found=offers.find(o=>o.id===id) || offers.find(o=>Math.abs(Number(o.price)-19.90)<0.001) ||
+      offers.find(o=>o.default===true) || offers[0] || null;
+  }
+  if(!found||!supportedPrice(found.price)||found.product!==PRODUCT_ID)throw new Error('NO_VALID_OFFER');
+  return {id:found.id,price:Number(found.price).toFixed(2)};
+}
+
